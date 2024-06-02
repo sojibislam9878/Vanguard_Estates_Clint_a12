@@ -1,9 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
-// import useAuth from "../Hooks/useAuth";
+import useAuth from "../Hooks/useAuth";
 
 const Navbar = () => {
-//   const { user, logout } = useAuth();
-const user = false
+ const { user, logout } = useAuth();
   const normalLink = "lg:font-bold lg:text-lg lg:mr-2 mt-2 lg:mt-0";
   const activeLink = `bg-gradient-to-r from-[#003366] to-[#003366] border border-blure-500 text-white border-none hover:bg-transparent focus:bg-transparent focus:text-white ${normalLink}`;
   return (
@@ -123,7 +122,7 @@ const user = false
                   </li>
                   <li>
                   <button
-                // onClick={logout}
+                onClick={logout}
                 className="btn mt-1 bg-[#003366] text-white font-bold hover:bg-[#C75A0F]"
               >
                 Logout
