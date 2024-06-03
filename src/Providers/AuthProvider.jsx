@@ -81,6 +81,18 @@ import {
     };
     //   user
     const [user, setUser] = useState(null);
+
+    // save user to database 
+    const saveUser =async (user)=>{
+      const currentUser = {
+        email: user?.email,
+        name: user?.displayName,
+        role: "user",
+      }
+
+      const {data}= await axios.put("http://localhost:3000/user", currentUser)
+      return data
+    }
   
     //   check user
     useEffect(() => {
@@ -97,6 +109,7 @@ import {
             .then((res) => {
               console.log(res.data);
             });
+            saveUser(currentUser)
         } else {
           axios
             .post("https://assignment11-chi.vercel.app/logout", logingUser, {
