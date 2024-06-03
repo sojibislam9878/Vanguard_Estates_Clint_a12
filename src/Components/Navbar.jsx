@@ -118,7 +118,7 @@ const Navbar = () => {
                     Sadikullah
                   </li>
                   <li>
-                    <Link to="/addfood" className="text-lg mb-4 font-semibold">Dashboard</Link>
+                    <Link to="/dashboard" className="text-lg mb-4 font-semibold">Dashboard</Link>
                   </li>
                   <li>
                   <button

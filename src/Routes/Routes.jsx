@@ -4,6 +4,7 @@ import Root from "../Layouts/Root";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import Apartment from "../Pages/Apartment";
+import Dashboard from "../Layouts/Dashboard";
 
 export const router = createBrowserRouter([
     {
@@ -28,4 +29,10 @@ export const router = createBrowserRouter([
         },
       ],
     },
+    {
+      path:"/dashboard",
+      element:<Dashboard></Dashboard>,
+      children:[
+      ]
+    }
   ]);
