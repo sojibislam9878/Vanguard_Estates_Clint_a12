@@ -9,7 +9,7 @@ const ApartmentsCard = ({apartment}) => {
         const fullData = {userName, userEmail, floor_number, block_name, apartment_number,rent , status:"pending"}
         console.log(fullData);
         console.log(floor_number);
-        fetch("http://localhost:3000/agreement", {
+        fetch(`http://localhost:3000/agreement?email=${userEmail}`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -21,6 +21,9 @@ const ApartmentsCard = ({apartment}) => {
         console.log(data);
         if (data.acknowledged === true) {
             alert("kaj hoye geche bro")
+        }
+        if (data.error) {
+            alert("alredy kine felecho")
         }
     })
     }
