@@ -33,11 +33,11 @@ const Home = () => {
               type="text"
               readOnly
               defaultValue={"nsjoiwe"}
-                className="input input-bordered join-item focus:outline-none"
+                className="input input-bordered join-item focus:outline-none focus:border-none border-none"
                 placeholder=""
               />
               <button className="btn join-item ">
-                Subscribe
+                Copy
               </button>
             </div>
               <div className=" border p-8 rounded-full w-20 h-20 bg-white absolute top-14 -right-12"></div>
@@ -59,7 +59,7 @@ const Home = () => {
                 placeholder=""
               />
               <button className="btn join-item ">
-                Subscribe
+                Copy
               </button>
             </div>
               <div className=" border p-8 rounded-full w-20 h-20 bg-white absolute top-14 -right-12"></div>
