@@ -3,10 +3,12 @@ import { GrLogout } from 'react-icons/gr'
 import { CgProfile } from "react-icons/cg";
 import { GrAnnounce } from "react-icons/gr";
 import { AiOutlineBars } from 'react-icons/ai'
-import { NavLink } from 'react-router-dom'
+import { MdOutlinePayments } from "react-icons/md";
+import { GrHistory } from "react-icons/gr";
 import { Link } from 'react-router-dom'
 import useAuth from '../../Hooks/useAuth'
 import useRole from '../../Hooks/useRole';
+import Navbars from './Navbars';
 
 const Sidebar = () => {
     
@@ -72,34 +74,19 @@ const Sidebar = () => {
 
             {/*  Menu Items */}
             <nav>
-              {/* Statistics */}
-              <NavLink
-                to='/dashboard'
-                end
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
-                    isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
-                  }`
-                }
-              >
-                <CgProfile className='w-5 h-5' />
+              {/* Profile */}
+              <Navbars label={"Profile"} address={'/dashboard'} icon={CgProfile}></Navbars>
 
-                <span className='mx-4 font-medium'>Profile</span>
-              </NavLink>
+              {/* make payments */}
+              <Navbars label={"Make Payments"} address={'makepaymenst'} icon={MdOutlinePayments}></Navbars>
 
-              {/* Add Room */}
-              <NavLink
-                to='announcments'
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
-                    isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
-                  }`
-                }
-              >
-                <GrAnnounce className='h-5 w-5'/>
+              {/*payments payment history */}
+              <Navbars label={"Payments History"} address={'paymentshistory'} icon={GrHistory}></Navbars>
 
-                <span className='mx-4 font-medium'>Announcments</span>
-              </NavLink>
+              {/* Announcments */}
+              <Navbars label={"Announcments"} address={'announcments'} icon={GrAnnounce}></Navbars>
+
+
             </nav>
           </div>
         </div>
