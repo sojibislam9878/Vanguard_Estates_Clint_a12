@@ -1,10 +1,8 @@
 import { useState } from 'react'
 import { GrLogout } from 'react-icons/gr'
-import { FcSettings } from 'react-icons/fc'
-import { BsFillHouseAddFill } from 'react-icons/bs'
-import { MdHomeWork } from 'react-icons/md'
+import { CgProfile } from "react-icons/cg";
+import { GrAnnounce } from "react-icons/gr";
 import { AiOutlineBars } from 'react-icons/ai'
-import { BsGraphUp } from 'react-icons/bs'
 import { NavLink } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import useAuth from '../../Hooks/useAuth'
@@ -19,7 +17,7 @@ const Sidebar = () => {
     setActive(!isActive)
   }
   return (
-    <>
+    <div className=''>
       {/* Small Screen Navbar */}
       <div className='bg-gray-100 text-gray-800 flex justify-between md:hidden'>
         <div>
@@ -73,43 +71,31 @@ const Sidebar = () => {
             <nav>
               {/* Statistics */}
               <NavLink
-                to='statistics'
+                to='/dashboard'
+                end
                 className={({ isActive }) =>
                   `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
                     isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
                   }`
                 }
               >
-                <BsGraphUp className='w-5 h-5' />
+                <CgProfile className='w-5 h-5' />
 
-                <span className='mx-4 font-medium'>Statistics</span>
+                <span className='mx-4 font-medium'>Profile</span>
               </NavLink>
 
               {/* Add Room */}
               <NavLink
-                to='add-room'
+                to='announcments'
                 className={({ isActive }) =>
                   `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
                     isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
                   }`
                 }
               >
-                <BsFillHouseAddFill className='w-5 h-5' />
+                <GrAnnounce className='h-5 w-5'/>
 
-                <span className='mx-4 font-medium'>Add Room</span>
-              </NavLink>
-              {/* My Listing */}
-              <NavLink
-                to='my-listings'
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
-                    isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
-                  }`
-                }
-              >
-                <MdHomeWork className='w-5 h-5' />
-
-                <span className='mx-4 font-medium'>My Listings</span>
+                <span className='mx-4 font-medium'>Announcments</span>
               </NavLink>
             </nav>
           </div>
@@ -119,18 +105,6 @@ const Sidebar = () => {
           <hr />
 
           {/* Profile Menu */}
-          <NavLink
-            to='/dashboard/profile'
-            className={({ isActive }) =>
-              `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
-                isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
-              }`
-            }
-          >
-            <FcSettings className='w-5 h-5' />
-
-            <span className='mx-4 font-medium'>Profile</span>
-          </NavLink>
           <button
             onClick={logOut}
             className='flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform'
@@ -141,7 +115,7 @@ const Sidebar = () => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   )
 };
 
