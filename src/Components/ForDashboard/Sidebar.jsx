@@ -6,11 +6,14 @@ import { AiOutlineBars } from 'react-icons/ai'
 import { NavLink } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import useAuth from '../../Hooks/useAuth'
+import useRole from '../../Hooks/useRole';
 
 const Sidebar = () => {
     
   const { logOut } = useAuth()
   const [isActive, setActive] = useState(false)
+  const {role} = useRole()
+  console.log(role);
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
