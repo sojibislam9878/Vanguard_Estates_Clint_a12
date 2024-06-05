@@ -3,8 +3,17 @@ import axios from 'axios';
 import { IoMdClose } from "react-icons/io";
 import { useState } from 'react'
 import { useForm } from 'react-hook-form';
+import { useQuery } from '@tanstack/react-query';
 
 const ManageCoupons = () => {
+    const { data: coupons ,refetch} = useQuery({
+        queryKey: ['coupons'],
+        queryFn: async () => {
+          const { data } = await axios(`http://localhost:3000/allcoupons`)
+          return data
+        },
+      })
+      console.log(coupons);
     const {
         register,
         handleSubmit,
@@ -20,7 +29,7 @@ const ManageCoupons = () => {
              return alert("Discount Percentage can not biger then 100")
         }
         const percentage = parseInt(datas.percentage)
-        const finalData = {title:datas?.title, percentage, description:datas?.description}
+        const finalData = {title:datas?.title, percentage, description:datas?.description, code:datas.code}
         console.log(finalData);
 
         const {data}= await axios.post(`http://localhost:3000/coupons`, finalData)
@@ -28,10 +37,20 @@ const ManageCoupons = () => {
         if (data.insertedId) {
             reset()
             setIsOpen(false)
+            refetch()
         }
         
       };
     let [isOpen, setIsOpen] = useState(false)
+
+    const handleDelete= async (id)=>{
+        const {data}= await axios.delete(`http://localhost:3000/deletecoupons/${id}`)
+        console.log(data);
+        if (data.deletedCount >= 1) {
+            alert("delete done")
+            refetch()
+        }
+    }
     return (
         <div className="p-4">
             <h1 className="text-center">Manage Coupons</h1>
@@ -40,7 +59,7 @@ const ManageCoupons = () => {
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
           <DialogPanel className="max-w-lg space-y-4 border bg-white p-12">
             <div className='relative'>
-            <h1 className="font-bold">Deactivate account</h1> <span onClick={()=>setIsOpen(false)} className='btn absolute -top-3 right-0'><IoMdClose className='text-red-700 text-3xl font-bold' /></span>
+            <h1 className="font-bold">Add a coupon</h1> <span onClick={()=>setIsOpen(false)} className='btn absolute -top-3 right-0'><IoMdClose className='text-red-700 text-3xl font-bold' /></span>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className=" bg-base-100">
                <div className='flex gap-6'>
@@ -64,6 +83,14 @@ const ManageCoupons = () => {
                 <span className="text-red-600 flex-1">Give a number</span>
               )}
                 </div>
+              <input
+                placeholder="Coupons Code"
+                {...register("code", { required: true })}
+                className="w-full border-b-2 py-4  outline-none mt-6 bg-transparent border-gray-400"
+              />
+              {errors.code && (
+                <span className="text-red-600">Give a code</span>
+              )}
               <input
                 placeholder="Write a short description"
                 {...register("description", { required: true })}
@@ -90,33 +117,22 @@ const ManageCoupons = () => {
     <thead>
       <tr>
         <th></th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Parcentage</th>
+        <th>Remove</th>
       </tr>
     </thead>
     <tbody>
-      {/* row 1 */}
-      <tr className="bg-base-200">
-        <th>1</th>
-        <td>Cy Ganderton</td>
-        <td>Quality Control Specialist</td>
-        <td>Blue</td>
-      </tr>
-      {/* row 2 */}
-      <tr>
-        <th>2</th>
-        <td>Hart Hagerty</td>
-        <td>Desktop Support Technician</td>
-        <td>Purple</td>
-      </tr>
-      {/* row 3 */}
-      <tr>
-        <th>3</th>
-        <td>Brice Swyre</td>
-        <td>Tax Accountant</td>
-        <td>Red</td>
-      </tr>
+        {
+            coupons?.map((coupon, i)=>(<tr key={coupon._id}>
+            <th>{i+1}</th>
+            <td>{coupon.title}</td>
+            <td>{coupon.code}</td>
+            <td>{coupon.percentage}</td>
+            <td><button onClick={()=>handleDelete(coupon._id)} className='btn'>remove</button></td>
+          </tr>))
+        }
     </tbody>
   </table>
 </div>
