@@ -53,8 +53,8 @@ const ManageCoupons = () => {
     }
     return (
         <div className="p-4">
-            <h1 className="text-center">Manage Coupons</h1>
-            <button onClick={()=>setIsOpen(!isOpen)} className="btn">Add a new Coupon</button>
+            <h1 className="text-center text-4xl font-bold mt-6">Manage Coupons</h1>
+            <button onClick={()=>setIsOpen(!isOpen)} className="btn mt-6">Add a new Coupon</button>
             <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
           <DialogPanel className="max-w-lg space-y-4 border bg-white p-12">
@@ -112,7 +112,7 @@ const ManageCoupons = () => {
         </div>
       </Dialog>
       <div className="overflow-x-auto">
-  <table className="table">
+  <table className="table mt-6">
     {/* head */}
     <thead>
       <tr>
