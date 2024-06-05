@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet";
@@ -9,8 +9,6 @@ const registerPhoto = true
 
 const Register = () => {
   const navigate = useNavigate();
-  const Locations = useLocation();
-  const form = Locations?.state || "/";
   const {
     register,
     handleSubmit,
@@ -21,25 +19,15 @@ const Register = () => {
   const handleHide = () => {
     setIsHide(!isHide);
   };
-  const { createUserWithEmail, updateUser } = useAuth();
+  const { createUserWithEmail, updateUser, logout } = useAuth();
 
   // create profile and update user
   const onSubmit = (data) => {
     const { email, password, name, photo } = data;
     createUserWithEmail(email, password, toast).then(() => {
       updateUser(name, photo);
-      fetch("https://assignment11", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        });
-      navigate(form);
+      logout()
+      navigate("/login");
     });
   };
 

@@ -83,10 +83,11 @@ import {
     const [user, setUser] = useState(null);
 
     // save user to database 
-    const saveUser =async (user)=>{
+    const saveUser =async user=>{
       const currentUser = {
         email: user?.email,
         name: user?.displayName,
+        photo:user?.photoURL,
         role: "user",
       }
 
@@ -96,33 +97,23 @@ import {
   
     //   check user
     useEffect(() => {
-      const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
-        const userEmail = currentUser?.email || user?.email;
-        const logingUser = { email: userEmail };
-        setUser(currentUser);
-  
+      const unsubscribe = onAuthStateChanged(auth, currentUser => {
+        setUser(currentUser)
         if (currentUser) {
-          axios
-            .post("https://assignment11-chi.vercel.app/jwt", logingUser, {
-              withCredentials: true,
-            })
-            .then((res) => {
-              console.log(res.data);
-            });
-            saveUser(currentUser)
-        } else {
-          axios
-            .post("https://assignment11-chi.vercel.app/logout", logingUser, {
-              withCredentials: true,
-            })
-            .then((res) => {
-              console.log(res.data);
-            });
+          // This function will be called after the component mounts
+    const timeoutId = setTimeout(() => {
+      saveUser(currentUser)
+    }, 500);
+
+    // Cleanup function to clear the timeout if the component unmounts
+    setLoading(false)
+    return () => clearTimeout(timeoutId);
         }
-        setLoading(false);
-      });
-      return () => unsubcribe();
-    }, [user?.email]);
+      })
+      return () => {
+        return unsubscribe()
+      }
+    }, [])
   
     // logout
     const logout = () => {
