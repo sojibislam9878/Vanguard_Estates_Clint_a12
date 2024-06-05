@@ -103,7 +103,7 @@ import {
           // This function will be called after the component mounts
     const timeoutId = setTimeout(() => {
       saveUser(currentUser)
-    }, 500);
+    }, 1000);
 
     // Cleanup function to clear the timeout if the component unmounts
     setLoading(false)
