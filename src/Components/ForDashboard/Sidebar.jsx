@@ -20,7 +20,7 @@ const Sidebar = () => {
   const { logOut } = useAuth()
 
 
-  const { user}=useAuth()
+  // const { user}=useAuth()
   // console.log(user?.email, loading);
 
   const [isActive, setActive] = useState(false)
@@ -37,7 +37,7 @@ const Sidebar = () => {
   //   .then(data=>setRole(data.role))
   // },[user,loading])
   
-  console.log( user?.email,role, isLoading);
+  // console.log( user?.email,role, isLoading);
 
 if (isLoading) {
   return <p>loading...</p>
