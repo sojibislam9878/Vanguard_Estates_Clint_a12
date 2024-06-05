@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet";
 import useAuth from "../../Hooks/useAuth";
 import useRole from "../../Hooks/useRole";
-
+import bgimage from "../../assets/Images/placeholder.jpg"
 
 const MyProfile = () => {
     const { user } = useAuth()
@@ -9,7 +9,7 @@ const MyProfile = () => {
 
     console.log(user)
     return (
-        <div className="flex gap-6 p-6">
+        <div className="lg:flex gap-6 p-6">
             <div className='flex-1'>
       <Helmet>
         <title>Profile</title>
@@ -17,7 +17,7 @@ const MyProfile = () => {
       <div className='bg-white shadow-lg  rounded-xl'>
         <img
           alt='profile'
-          src='https://wallpapercave.com/wp/wp10784415.jpg'
+          src={bgimage}
           className='w-full mb-4 h-36 object-fill  rounded-t-xl'
         />
         <div className='flex flex-col items-center justify-center p-4 -mt-20'>
@@ -29,7 +29,7 @@ const MyProfile = () => {
             />
           </a>
 
-          <p className='p-2 px-4 text-xs capitalize text-white bg-pink-500 rounded-full'>
+          <p className='p-2 px-4 mt-4 text-xs capitalize text-white bg-pink-500 rounded-full'>
             {role}
           </p>
           <p className='mt-2 text-xl font-medium text-gray-800 '>
@@ -62,7 +62,7 @@ const MyProfile = () => {
       </div>
     </div>
     {/* info  */}
-    <div className="bg-slate-100 p-4 flex-1 rounded-xl ">
+    <div className="bg-slate-100 p-4 flex-1 rounded-xl mt-6 lg:mt-0">
         <h1>indfo</h1>
         <div className="flex justify-center items-center h-full">
         <table className="w-full">
