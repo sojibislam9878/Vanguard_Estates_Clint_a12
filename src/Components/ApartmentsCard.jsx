@@ -5,8 +5,10 @@ const ApartmentsCard = ({apartment}) => {
     const userName = user?.displayName || undefined
     const userEmail = user?.email || undefined
     const {floor_number,block_name,apartment_number, rent} = apartment
+    const currentDate = new Date().toISOString().split('T')[0]
+    console.log(currentDate);
     const handleAgreement =()=>{
-        const fullData = {userName, userEmail, floor_number, block_name, apartment_number,rent , status:"pending"}
+        const fullData = {userName, userEmail, floor_number, block_name, apartment_number,rent , status:"pending", currentDate}
         console.log(fullData);
         console.log(floor_number);
         fetch(`http://localhost:3000/agreement?email=${userEmail}`, {
