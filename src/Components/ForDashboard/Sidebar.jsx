@@ -4,18 +4,45 @@ import { CgProfile } from "react-icons/cg";
 import { GrAnnounce } from "react-icons/gr";
 import { AiOutlineBars } from 'react-icons/ai'
 import { MdOutlinePayments } from "react-icons/md";
+import { MdManageAccounts } from "react-icons/md";
+import { VscRequestChanges } from "react-icons/vsc";
+import { RiCoupon3Line } from "react-icons/ri";
 import { GrHistory } from "react-icons/gr";
 import { Link } from 'react-router-dom'
 import useAuth from '../../Hooks/useAuth'
 import useRole from '../../Hooks/useRole';
 import Navbars from './Navbars';
+// import useRole from '../../Hooks/useRole';
+// import { useQuery } from '@tanstack/react-query';
+// import axios from 'axios';
 
 const Sidebar = () => {
-    
   const { logOut } = useAuth()
+
+
+  const { user}=useAuth()
+  // console.log(user?.email, loading);
+
   const [isActive, setActive] = useState(false)
-  const {role} = useRole()
-  console.log(role);
+  const [role, isLoading]=useRole()
+  
+  
+  // const [role, setRole]=useState()
+  // useEffect(()=>{
+  //   if (loading && user?.email) {
+  //     return
+  //   }
+  //   fetch(`http://localhost:3000/user/${user?.email}`)
+  //   .then(res=>res.json())
+  //   .then(data=>setRole(data.role))
+  // },[user,loading])
+  
+  console.log( user?.email,role, isLoading);
+
+if (isLoading) {
+  return <p>loading...</p>
+}
+
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -30,7 +57,7 @@ const Sidebar = () => {
             <Link to='/'>
               <img
                 // className='hidden md:block'
-                src='https://i.ibb.co/4ZXzmq5/logo.png'
+                // src='https://i.ibb.co/4ZXzmq5/logo.png'
                 alt='logo'
                 width='100'
                 height='100'
@@ -59,7 +86,7 @@ const Sidebar = () => {
               <Link to='/'>
                 <img
                   // className='hidden md:block'
-                  src='https://i.ibb.co/4ZXzmq5/logo.png'
+                  // src='https://i.ibb.co/4ZXzmq5/logo.png'
                   alt='logo'
                   width='100'
                   height='100'
@@ -75,16 +102,31 @@ const Sidebar = () => {
             {/*  Menu Items */}
             <nav>
               {/* Profile */}
-              <Navbars label={"Profile"} address={'/dashboard'} icon={CgProfile}></Navbars>
+              {(role==="member" || role==="user") && <Navbars label={"Profile"} address={'/dashboard'} icon={CgProfile}></Navbars>}
 
               {/* make payments */}
-              <Navbars label={"Make Payments"} address={'makepaymenst'} icon={MdOutlinePayments}></Navbars>
+              {role==="member" && <Navbars label={"Make Payments"} address={'makepayment'} icon={MdOutlinePayments}></Navbars>}
 
               {/*payments payment history */}
-              <Navbars label={"Payments History"} address={'paymentshistory'} icon={GrHistory}></Navbars>
+              {role==="member" && <Navbars label={"Payments History"} address={'paymentshistory'} icon={GrHistory}></Navbars>}
 
               {/* Announcments */}
-              <Navbars label={"Announcments"} address={'announcments'} icon={GrAnnounce}></Navbars>
+              {(role==="member" || role==="user")&&<Navbars label={"Announcments"} address={'announcments'} icon={GrAnnounce}></Navbars>}
+
+              {/* admin profile */}
+              {role==="admin" &&<Navbars label={"Admin Profile"} address={'/dashboard'} icon={CgProfile}></Navbars>}
+
+              {/* Manage Members */}
+              {role==="admin" &&<Navbars label={"Manage Members"} address={'managemembers'} icon={MdManageAccounts}></Navbars>}
+
+              {/* Make Announcement */}
+              {role==="admin" &&<Navbars label={"Make Announcement"} address={'makeannouncement'} icon={GrAnnounce}></Navbars>}
+
+              {/*Agreement Requests */}
+              {role==="admin" &&<Navbars label={"Agreement Requests"} address={'agreementrequests'} icon={VscRequestChanges}></Navbars>}
+
+              {/* Manage Coupons */}
+              {role==="admin" &&<Navbars label={"Manage Coupons"} address={'managecoupons'} icon={RiCoupon3Line}></Navbars>}
 
 
             </nav>

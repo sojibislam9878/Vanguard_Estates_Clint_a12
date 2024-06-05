@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import ApartmentsCard from "../Components/ApartmentsCard";
+import useRole from "../Hooks/useRole";
 
 const Apartment = () => {
   const [apartments, setApartments] = useState([]);
+  const [role]=useRole()
+  console.log(role);
 
   useEffect(() => {
     fetch("http://localhost:3000/apartments")
