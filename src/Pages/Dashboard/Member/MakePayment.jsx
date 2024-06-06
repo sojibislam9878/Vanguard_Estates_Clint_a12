@@ -1,13 +1,12 @@
-import { Elements } from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
-import CheckOutForm from '../../../Components/CheckOutForm';
+
 import paymentbg from '../../../assets/Images/paymentbg.jpg'
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import useAuth from '../../../Hooks/useAuth';
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
+import { useNavigate } from 'react-router-dom';
 const MakePayment = () => {
-    const {user, loading} = useAuth()
+    const {user, loading, setMemberPaymentInfo} = useAuth()
+    const navigate =useNavigate()
     
     const {data:agreement}= useQuery({
         queryKey:["agreement"],
@@ -27,6 +26,15 @@ const MakePayment = () => {
     //       return data
     //     },
     //   })
+
+    const handleSubmit=(event)=>{
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const formObject = Object.fromEntries(formData.entries());
+        setMemberPaymentInfo(formObject)
+        console.log(formObject);
+        navigate("/completepayment")
+    }
     return (
         <div
         style={{ backgroundImage:`url(${paymentbg})`,
@@ -34,23 +42,57 @@ const MakePayment = () => {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",} }
          className='flex flex-col justify-center p-4  mx-auto h-screen my-auto'>
-            <div className='shadow-2xl p-4 backdrop-blur-md lg:w-2/3 lg:mx-auto rounded-xl'>
-            <div className='text-white text-xl font-bold'>
-                <div className='flex justify-start'>
-                    <p className='flex-1'>Apartment No: {agreement.apartment_number}</p>
-                    <p className='flex-1'>Block No: {agreement.block_name}</p>
-                </div>
-                <div className='flex justify-start mt-8'>
-                    <p className='flex-1'>Floor No: {agreement.floor_number}</p>
-                    <p className='flex-1'>Rent No: {agreement.rent}$/month</p>
-                </div>
-            </div>
-            <div className='w-full mt-8'>
-            <Elements stripe={stripePromise}>
-      <CheckOutForm></CheckOutForm>
-    </Elements>
-            </div>
-            </div>
+            <div>
+            <form onSubmit={handleSubmit}>
+         <div className='w-2/3 mx-auto backdrop-blur-lg border p-4 rounded-xl'>
+         <div className='lg:flex justify-between gap-6 '>
+          <div className='w-full'>
+            <p className='font-bold mb-2 '>Member email :</p>
+            <input name='memberEmail' defaultValue={user?.email} readOnly className='w-full px-2 py-3 rounded-lg focus:outline-none '></input>
+          </div>
+          <div className='w-full mt-4 lg:mt-0'>
+            <p className='font-bold mb-2 ' >Floor No :</p>
+            <input name='floorNo' defaultValue={agreement?.floor_number} readOnly className='w-full px-2 py-3 rounded-lg focus:outline-none '></input>
+          </div>
+          </div>
+         <div className='lg:flex justify-between gap-6 mt-4 lg:mt-2'>
+          <div className='w-full'>
+            <p className='font-bold mb-2 '>Block Name :</p>
+            <input name='blockNo' defaultValue={agreement?.block_name} readOnly className='w-full px-2 py-3 rounded-lg focus:outline-none '></input>
+          </div>
+          <div className='w-full mt-4 lg:mt-0'>
+            <p className='font-bold mb-2 ' >Apartment No :</p>
+            <input name='apartmentNo' defaultValue={agreement?.apartment_number} readOnly className='w-full px-2 py-3 rounded-lg focus:outline-none '></input>
+          </div>
+          </div>
+         <div className='lg:flex justify-between gap-6 mt-4 lg:mt-2'>
+          <div className='w-full'>
+            <p className='font-bold mb-2 '>Rent :</p>
+            <input name='rent' defaultValue={agreement?.rent} readOnly className='w-full px-2 py-3 rounded-lg focus:outline-none '></input>
+          </div>
+          <div className='w-full mt-4 lg:mt-0'>
+            <p className='font-bold mb-2 ' >Month :</p>
+            <select id="dropdown" name="month" className='w-full px-2 py-3 rounded-lg focus:outline-none'>
+            <option value="january">January</option>
+        <option value="february">February</option>
+        <option value="march">March</option>
+        <option value="april">April</option>
+        <option value="may">May</option>
+        <option value="june" selected>June</option>
+        <option value="july">July</option>
+        <option value="august">August</option>
+        <option value="september">September</option>
+        <option value="october">October</option>
+        <option value="november">November</option>
+        <option value="december">December</option>
+    </select>
+          </div>
+          </div>
+         <input type="submit" value={"Pay Now"} className='btn w-full mt-6 text-xl font-bold' />
+         </div>
+        </form>
+
+    </div>
         </div>
     );
 };

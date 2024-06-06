@@ -17,6 +17,7 @@ import {
   
   const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
+    const [memberPaymentInfo , setMemberPaymentInfo]=useState({})
   
     // login with email and password
     const createUserWithEmail = (email, password, toast) => {
@@ -142,6 +143,8 @@ import {
       loading,
       googleSignUP,
       githubSignUP,
+      setMemberPaymentInfo,
+      memberPaymentInfo
     };
   
     return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

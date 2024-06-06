@@ -1,19 +1,22 @@
+import PropTypes from 'prop-types';
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import "../CSS/CheckOutFrom.css"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../Hooks/useAuth";
-const CheckOutForm = () => {
+const CheckOutForm = ({price}) => {
     const stripe = useStripe();
     const elements = useElements();
     const [clientSecret, setClientSecret] = useState("");
     const {user}=useAuth()
     const today = new Date()
     const onlyDate = today.toISOString().split('T')[0]
+    const{memberPaymentInfo}=useAuth()
+    // console.log(memberPaymentInfo);
 
     useEffect(() => {
-        getClintSecret({price:200})
-      }, []);
+        getClintSecret({price:price})
+      }, [price]);
 
       const getClintSecret = async (price)=>{
         const {data} = await axios.post("http://localhost:3000/create-payment-intent", price)
@@ -60,13 +63,14 @@ const CheckOutForm = () => {
         console.log('[confirmError]', confirmError);
     } 
 
-    if (paymentIntent.status ==="succeeded") {
+    if (paymentIntent?.status ==="succeeded") {
         const paymentInfo = {
             transactionId:paymentIntent.id,
             date:onlyDate,
             clintName: user?.displayName,
             clintEmail: user?.email,
-            cardBrand: paymentIntent.card?.brand,
+            pay:price,
+            paymentMonth:memberPaymentInfo?.month,
         }
         console.log(paymentInfo);
         const {data}= await axios.post("http://localhost:3000/paymentinfo" , paymentInfo)
@@ -100,5 +104,7 @@ const CheckOutForm = () => {
     </form>
     );
 };
-
+CheckOutForm.propTypes = {
+  price: PropTypes.number
+};
 export default CheckOutForm;
