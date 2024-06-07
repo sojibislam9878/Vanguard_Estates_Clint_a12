@@ -20,7 +20,7 @@ const Apartment = () => {
       <h1>apartment</h1>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 mb-32">
         {
-            apartments.map(apartment=><ApartmentsCard key={apartment._id} apartment={apartment}></ApartmentsCard>)
+            apartments.map(apartment=><ApartmentsCard key={apartment._id} role={role} apartment={apartment}></ApartmentsCard>)
         }
       </div>
     </div>

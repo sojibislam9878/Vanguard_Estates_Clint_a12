@@ -1,8 +1,20 @@
+import { useQuery } from "@tanstack/react-query";
 import AboutBuilding from "../Components/AboutBuilding";
 import SectionTitle from "../Components/SectionTitle";
 import Slider from "../Components/Slider";
+import axios from "axios";
+import CouponCard from "../Components/CouponCard";
+import { ToastContainer } from "react-toastify";
 
 const Home = () => {
+  const {data:coupons}=useQuery({
+    queryKey:["coupons"],
+    queryFn:async ()=>{
+      const {data}= await axios("http://localhost:3000/allcoupons")
+      console.log(data);
+      return data
+    }
+  })
   return (
     <div className="text-center">
       <Slider></Slider>
@@ -21,54 +33,12 @@ const Home = () => {
         ></SectionTitle>
         <div className=" grid lg:grid-cols-2 gap-6">
           {/* coupons cards */}
-          <div className=" bg-gradient-to-tl from-violet-500 to-fuchsia-500 p-8 rounded-xl  relative overflow-hidden">
-            <h1 className="text-white">Coupon!!!</h1>
-            <p className="text-white">
-              Enthusiastically synthesize scalable niches via clicks-and-mortar
-              deliverables. Monotonectally exploit emerging expertise via
-              empowered deliverables. Monotonectally.
-            </p>
-            <div className="join">
-              <input
-              type="text"
-              readOnly
-              defaultValue={"nsjoiwe"}
-                className="input input-bordered join-item focus:outline-none focus:border-none border-none"
-                placeholder=""
-              />
-              <button className="btn join-item ">
-                Copy
-              </button>
-            </div>
-              <div className=" border p-8 rounded-full w-20 h-20 bg-white absolute top-14 -right-12"></div>
-              <div className=" border p-8 rounded-full w-20 h-20 bg-white absolute top-14 -left-12"></div>
-          </div>
-          <div className=" bg-gradient-to-br from-sky-500 to-indigo-500 p-8 rounded-xl  relative overflow-hidden">
-            <h1 className="text-white">Coupon!!!</h1>
-            <p className="text-white">
-              Enthusiastically synthesize scalable niches via clicks-and-mortar
-              deliverables. Monotonectally exploit emerging expertise via
-              empowered deliverables. Monotonectally.
-            </p>
-            <div className="join">
-              <input
-              type="text"
-              readOnly
-              defaultValue={"nsjoiwe"}
-                className="input input-bordered join-item"
-                placeholder=""
-              />
-              <button className="btn join-item ">
-                Copy
-              </button>
-            </div>
-              <div className=" border p-8 rounded-full w-20 h-20 bg-white absolute top-14 -right-12"></div>
-              <div className=" border p-8 rounded-full w-20 h-20 bg-white absolute top-14 -left-12"></div>
-          </div>
-          <div className="border bg-red-500">duck</div>
-          <div className="border bg-red-500">duck</div>
+          {
+            coupons?.map((coupon, i)=><CouponCard key={coupon._id} coupon={coupon} i={i+1}></CouponCard>)
+          }
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
