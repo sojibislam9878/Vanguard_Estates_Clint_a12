@@ -67,9 +67,11 @@ const Navbar = () => {
           >
             Vanguard Estates
           </Link> */}
-          <div className="lg:w-2/6 md:w-3/6 ml-4">
+          <Link to="/">
+          <div className="lg:w-2/6 md:w-3/6 ml-4 cursor-pointer">
                 <img className="w-[1000px] h-[70px] object-cover" src="logo.png" alt="" />
               </div>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">

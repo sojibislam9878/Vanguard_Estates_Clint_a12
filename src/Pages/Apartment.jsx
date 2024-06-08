@@ -49,8 +49,10 @@ const Apartment = () => {
   };
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-4xl py-6 font-bold">All Apartment :</h1>
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 ">
+      <div className="text-center">
+        <h1 className="text-4xl font-extrabold border-b-2  border-dashed font-play pb-4 mt-4">All apartments</h1>
+      </div>
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 mt-8">
         {
             apartments.map(apartment=><ApartmentsCard key={apartment._id} role={role} apartment={apartment}></ApartmentsCard>)
         }
