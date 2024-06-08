@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import useAuth from '../Hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 const ApartmentsCard = ({apartment, role}) => {
     const {user}=useAuth()
+    const navigate = useNavigate()
     
     const userName = user?.displayName || undefined
     const userEmail = user?.email || undefined
@@ -10,6 +12,9 @@ const ApartmentsCard = ({apartment, role}) => {
     const handleAgreement =()=>{
       if (role ==="admin") {
         return alert("Admin can not request for agreement")
+      }
+      if (!role) {
+        return navigate("/login")
       }
         const fullData = {userName, userEmail, floor_number, block_name, apartment_number,rent , status:"pending", currentDate}
         console.log(fullData);
@@ -36,12 +41,12 @@ const ApartmentsCard = ({apartment, role}) => {
         <div className="card card-compact bg-base-100 shadow-xl">
   <figure><img src={image_url} alt="Shoes" /></figure>
   <div className="card-body">
-    <p>Floor Number: {floor_number}</p>
-    <p>Block Name: {block_name}</p>
-    <p>Apartment No: {apartment_number}</p>
-    <p>Rent: {rent} $ /month</p>
+    <p className='text-xl font-bold'>Floor No: {floor_number}</p>
+    <p className='text-lg font-bold opacity-80'>Block Name: {block_name}</p>
+    <p className='text-lg font-bold opacity-80'>Apartment No: {apartment_number}</p>
+    <p className='text-lg font-bold opacity-80'>Rent: {rent} $ /month</p>
     <div className="card-actions">
-      <button onClick={handleAgreement} className="btn btn-primary">Agreement</button>
+      <button onClick={handleAgreement} className="btn bg-[#003366] text-white font-bold hover:bg-[#3b5e81]">Agreement</button>
     </div>
   </div>
 </div>
