@@ -42,17 +42,17 @@ const CouponCard = ({coupon ,i}) => {
 
     return (
         <div className={`${bgColor} p-8 rounded-xl relative overflow-hidden`}>
-            <h1 className="text-white text-2xl font-bold">{coupon?.title} !!</h1>
+            <h1 className="text-white text-lg md:text-2xl font-bold">{coupon?.title} !!</h1>
             <div>
-                <h1 className="text-9xl font-bold text-white my-6">{coupon?.percentage} %off</h1>
+                <h1 className="md:text-9xl text-4xl font-bold text-white md:my-6 my-2">{coupon?.percentage} %off</h1>
             </div>
-            <div className="join">
+            <div className="join mt-3">
               <input
               type="text"
               readOnly
               name="code"
               defaultValue={coupon?.code}
-                className="input input-bordered join-item focus:outline-none focus:border-none border-none"
+                className="input input-bordered join-item focus:outline-none focus:border-none border-none w-2/3 md:w-full "
                 placeholder=""
                 ref={inputRef}
               />
@@ -63,8 +63,8 @@ const CouponCard = ({coupon ,i}) => {
             </div>
             <p className="text-white mt-4">{coupon?.description}
             </p>
-              <div className=" border p-8 rounded-full w-20 h-20 bg-white absolute top-40 -right-12"></div>
-              <div className=" border p-8 rounded-full w-20 h-20 bg-white absolute top-40 -left-12"></div>
+              <div className=" border p-8 rounded-full md:w-20 md:h-20 w-10 h-10 bg-white absolute md:top-40 top-24 -right-12"></div>
+              <div className=" border p-8 rounded-full md:w-20 md:h-20 w-10 h-10 bg-white absolute md:top-40 top-24 -left-12"></div>
       
           </div>
     );
