@@ -61,12 +61,15 @@ const Navbar = () => {
               )}
             </ul>
           </div>
-          <Link
+          {/* <Link
             to="/"
             className="btn btn-ghost md:text-3xl text-xl font-play text-[#3181d1]"
           >
             Vanguard Estates
-          </Link>
+          </Link> */}
+          <div className="lg:w-2/6 md:w-3/6 ml-4">
+                <img className="w-[1000px] h-[70px] object-cover" src="logo.png" alt="" />
+              </div>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
