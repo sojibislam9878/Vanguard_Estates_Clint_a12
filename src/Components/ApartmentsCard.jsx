@@ -7,8 +7,8 @@ const ApartmentsCard = ({apartment, role}) => {
     
     const userName = user?.displayName || undefined
     const userEmail = user?.email || undefined
-    const {floor_number,block_name,apartment_number, rent, image_url } = apartment
-    const currentDate = new Date().toISOString().split('T')[0]
+    const {_id,floor_number,block_name,apartment_number, rent, image_url } = apartment
+    const requstDate = new Date().toISOString().split('T')[0]
     const handleAgreement =()=>{
       if (role ==="admin") {
         return alert("Admin can not request for agreement")
@@ -16,7 +16,7 @@ const ApartmentsCard = ({apartment, role}) => {
       if (!role) {
         return navigate("/login")
       }
-        const fullData = {userName, userEmail, floor_number, block_name, apartment_number,rent , status:"pending", currentDate}
+        const fullData = {userName, userEmail, floor_number, block_name, apartment_number,rent , status:"pending", requstDate , id:_id , image_url}
         console.log(fullData);
         console.log(floor_number);
         fetch(`http://localhost:3000/agreement?email=${userEmail}`, {

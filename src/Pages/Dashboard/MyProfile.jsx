@@ -1,19 +1,32 @@
-import { Helmet } from "react-helmet";
+
+import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useRole from "../../Hooks/useRole";
 import bgimage from "../../assets/Images/placeholder.jpg"
+import axios from "axios";
+import AdminPro from "./Admin/AdminPro";
 
 const MyProfile = () => {
-    const { user } = useAuth()
+    const { user,loading } = useAuth()
     const [role]=useRole()
+    const {data:agreement = {}}= useQuery({
+      queryKey:["agreement"],
+      enabled: !loading && !!user?.email,
+      queryFn:async ()=>{
+          const {data} = await axios(`http://localhost:3000/agreement/${user?.email}`)
+          console.log(data);
+          return data
+      }
+  })
+  console.log(agreement);
 
     console.log(user)
+    if (role==="admin") {
+      return <AdminPro></AdminPro>
+    }
     return (
-        <div className="lg:flex gap-6 p-6">
+        <div className="lg:flex gap-6 p-6 lg:mt-44">
             <div className='flex-1'>
-      <Helmet>
-        <title>Profile</title>
-      </Helmet>
       <div className='bg-white shadow-lg  rounded-xl'>
         <img
           alt='profile'
@@ -62,30 +75,30 @@ const MyProfile = () => {
       </div>
     </div>
     {/* info  */}
-    <div className="bg-slate-100 p-4 flex-1 rounded-xl mt-6 lg:mt-0">
-        <h1>indfo</h1>
+    <div className="bg-slate-100 p-4 flex-1 rounded-xl mt-6 lg:mt-0 ">
+        <h1 className="text-3xl font-bold">{user?.displayName}’s info :</h1>
         <div className="flex justify-center items-center h-full">
         <table className="w-full">
       <tbody>
         <tr className="border">
-          <td className="w-1/2 py-2 pl-2">Agreement accept date</td>
-          <td className="w-1/2 py-2 pl-2">none</td>
+          <td className="w-1/2 py-2 pl-2 font-bold">Agreement accept date :</td>
+          <td className="w-1/2 py-2 pl-2 font-medium opacity-80">{agreement?.status ==="pending" ? "none" : agreement?.accepteDate || "none"}</td>
         </tr>
         <tr className="border">
-          <td className="w-1/2 py-2 pl-2">Floor No:</td>
-          <td className="w-1/2 py-2 pl-2">none</td>
+          <td className="w-1/2 py-2 pl-2 font-bold">Floor No :</td>
+          <td className="w-1/2 py-2 pl-2 font-medium opacity-80">{agreement?.status ==="pending" ? "none" : agreement?.floor_number || "none"}</td>
         </tr>
         <tr className="border">
-          <td className="w-1/2 py-2 pl-2">Block Name:</td>
-          <td className="w-1/2 py-2 pl-2">None</td>
+          <td className="w-1/2 py-2 pl-2 font-bold">Block Name :</td>
+          <td className="w-1/2 py-2 pl-2 font-medium opacity-80">{agreement?.status ==="pending" ? "none" : agreement?.block_name || "none"}</td>
         </tr>
         <tr className="border">
-          <td className="w-1/2 py-2 pl-2">Apartment No:</td>
-          <td className="w-1/2 py-2 pl-2">None</td>
+          <td className="w-1/2 py-2 pl-2 font-bold">Apartment No :</td>
+          <td className="w-1/2 py-2 pl-2 font-medium opacity-80">{agreement?.status ==="pending" ? "none" : agreement?.apartment_number || "none"}</td>
         </tr>
         <tr className="border">
-          <td className="w-1/2 py-2 pl-2">Rent:</td>
-          <td className="w-1/2 py-2 pl-2">None</td>
+          <td className="w-1/2 py-2 pl-2 font-bold">Rent :</td>
+          <td className="w-1/2 py-2 pl-2 font-medium opacity-80">{agreement?.status ==="pending" ? "none" : agreement?.rent || "none"} /month</td>
         </tr>
       </tbody>
     </table>
