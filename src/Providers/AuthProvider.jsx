@@ -11,11 +11,12 @@ import {
   import PropTypes from "prop-types";
   import { createContext, useEffect, useState } from "react";
   import { auth } from "../Firebase/firebaseConfig";
-  import axios from "axios";
   import Swal from "sweetalert2";
+import useAxiosCommon from "../Hooks/useAxiosCommon";
   export const AuthContext = createContext(null);
   
   const AuthProvider = ({ children }) => {
+    const axiosCommon=useAxiosCommon()
     const [loading, setLoading] = useState(true);
     const [memberPaymentInfo , setMemberPaymentInfo]=useState({})
   
@@ -92,7 +93,7 @@ import {
         role: "user",
       }
 
-      const {data}= await axios.put("http://localhost:3000/user", currentUser)
+      const {data}= await axiosCommon.put("/user", currentUser)
       return data
     }
   
@@ -106,7 +107,7 @@ import {
             console.log("User Info:", userInfo);
           
             try {
-              const {data} = await axios.post("http://localhost:3000/jwt", userInfo);
+              const {data} = await axiosCommon.post("/jwt", userInfo);
               console.log({data});
               localStorage.setItem("access-token", data)
             } catch (error) {
@@ -130,7 +131,7 @@ import {
       return () => {
         return unsubscribe()
       }
-    }, [])
+    }, [axiosCommon])
   
     // logout
     const logout = () => {

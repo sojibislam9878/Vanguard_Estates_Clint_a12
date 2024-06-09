@@ -1,7 +1,9 @@
-import axios from "axios";
+
 import { useForm } from "react-hook-form";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const MakeAnnouncement = () => {
+  const axiosSecure=useAxiosSecure()
     const {
         register,
         handleSubmit,
@@ -11,7 +13,7 @@ const MakeAnnouncement = () => {
     
       const onSubmit =async (datas) => {
         console.log(datas);
-        const {data}= await axios.post("http://localhost:3000/announcment",datas)
+        const {data}= await axiosSecure.post("/announcment",datas)
         console.log(data);
         if (data.insertedId) {
             alert("announcment added")

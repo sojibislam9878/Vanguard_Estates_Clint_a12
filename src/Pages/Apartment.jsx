@@ -15,7 +15,7 @@ const Apartment = () => {
   console.log(role);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/apartments?page=${currentPage}&size=${cardPerPage}`)
+    fetch(`${import.meta.env.VITE_API_URL}/apartments?page=${currentPage}&size=${cardPerPage}`)
     .then(res=>res.json())
     .then(data=>{
         console.log(data);
@@ -24,7 +24,7 @@ const Apartment = () => {
 
   }, [currentPage]);
   useEffect(()=>{
-    fetch(`http://localhost:3000/apartmentCounts`)
+    fetch(`${import.meta.env.VITE_API_URL}/apartmentCounts`)
     .then(res=>res.json())
     .then(data=>{
         console.log(data);

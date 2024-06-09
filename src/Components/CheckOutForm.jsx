@@ -2,29 +2,36 @@ import PropTypes from 'prop-types';
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import "../CSS/CheckOutFrom.css"
 import { useEffect, useState } from "react";
-import axios from "axios";
 import useAuth from "../Hooks/useAuth";
+import useAxiosSecure from '../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
+import { FaSpinner } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 const CheckOutForm = ({price}) => {
     const stripe = useStripe();
     const elements = useElements();
     const [clientSecret, setClientSecret] = useState("");
     const {user}=useAuth()
+    const[processing, setProcessing]=useState(false)
     const today = new Date()
     const onlyDate = today.toISOString().split('T')[0]
     const{memberPaymentInfo}=useAuth()
     // console.log(memberPaymentInfo);
+    const axiosSecure=useAxiosSecure()
+    const navigate=useNavigate()
 
     useEffect(() => {
         getClintSecret({price:price})
       }, [price]);
 
       const getClintSecret = async (price)=>{
-        const {data} = await axios.post("http://localhost:3000/create-payment-intent", price)
+        const {data} = await axiosSecure.post("/create-payment-intent", price)
         console.log(data.clientSecret);
         setClientSecret(data.clientSecret)
     }
   
     const handleSubmit = async (event) => {
+      
       // Block native form submission.
       event.preventDefault();
   
@@ -36,7 +43,7 @@ const CheckOutForm = ({price}) => {
       if (card == null) {
         return;
       }
-  
+      
       // Use your card Element with other Stripe.js APIs
       const {error, paymentMethod} = await stripe.createPaymentMethod({
         type: 'card',
@@ -47,6 +54,7 @@ const CheckOutForm = ({price}) => {
         console.log('[error]', error);
       } else {
         console.log('[PaymentMethod]', paymentMethod);
+        setProcessing(true)
         }
        // Confirm payment 
        const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
@@ -60,6 +68,7 @@ const CheckOutForm = ({price}) => {
     });
 
     if (confirmError) {
+      
         console.log('[confirmError]', confirmError);
     } 
 
@@ -73,11 +82,19 @@ const CheckOutForm = ({price}) => {
             paymentMonth:memberPaymentInfo?.month,
         }
         console.log(paymentInfo);
-        const {data}= await axios.post("http://localhost:3000/paymentinfo" , paymentInfo)
+        const {data}= await axiosSecure.post("/paymentinfo" , paymentInfo)
         console.log(data);
         if (data.insertedId) {
-            alert("payment succees")
+          setProcessing(false)
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Payment successfull",
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
+        navigate("/dashboard/paymentshistory")
     }
 };
     return (
@@ -98,8 +115,8 @@ const CheckOutForm = ({price}) => {
           },
         }}
       />
-      <button type="submit" className="btn" disabled={!stripe}>
-        Pay
+      <button type="submit" className="btn bg-blue-500  text-white" disabled={!stripe || processing}>
+       {processing?(<span><FaSpinner  className='text-3xl animate-spin'/></span>):(`Pay ${price} $`)}
       </button>
     </form>
     );

@@ -1,14 +1,15 @@
 import ApartmentPercentage from "../../../Components/ApartmentsPercentage";
 import UserPercentage from "../../../Components/UserPercentage";
 import useAuth from "../../../Hooks/useAuth";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useRole from "../../../Hooks/useRole";
 import bgimage from "../../../assets/Images/placeholder.jpg"
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useEffect, useState } from "react";
 const AdminPro = () => {
     const {user}=useAuth()
     const [role]=useRole()
+    const axiosSecure =useAxiosSecure()
     const [userCount, setUserCount]=useState(0)
     const [memberCount, setMemberCount]=useState(0)
     const [apartmentCounts, setApartmentCounts]=useState(0)
@@ -17,26 +18,26 @@ const AdminPro = () => {
     const {data: allUsers =[] }=useQuery({
         queryKey:["allUsers"],
         queryFn: async()=>{
-            const {data} = await axios("http://localhost:3000/allusers")
+            const {data} = await axiosSecure("/allusers")
             return data
         }
     })
     const {data: allmembers =[] }=useQuery({
         queryKey:["allmembers"],
         queryFn: async()=>{
-            const {data} = await axios("http://localhost:3000/members")
+            const {data} = await axiosSecure("/members")
             return data
         }
     })
     const {data: vacantApartment =[] }=useQuery({
         queryKey:["allmembers"],
         queryFn: async()=>{
-            const {data} = await axios("http://localhost:3000/vacantapartemnt")
+            const {data} = await axiosSecure("/vacantapartemnt")
             return data
         }
     })
     useEffect(()=>{
-        fetch(`http://localhost:3000/apartmentCounts`)
+        fetch(`${import.meta.env.VITE_API_URL}/apartmentCounts`)
         .then(res=>res.json())
         .then(data=>{
             setApartmentCounts(data.length)

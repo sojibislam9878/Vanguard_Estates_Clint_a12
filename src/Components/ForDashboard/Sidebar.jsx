@@ -32,7 +32,6 @@ const Sidebar = () => {
   //   if (loading && user?.email) {
   //     return
   //   }
-  //   fetch(`http://localhost:3000/user/${user?.email}`)
   //   .then(res=>res.json())
   //   .then(data=>setRole(data.role))
   // },[user,loading])

@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import AgreementCard from "../../../Components/ForDashboard/AgreementCard";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AgreementRequests = () => {
+  const axiosSecure=useAxiosSecure()
     const { data: agreements , refetch} = useQuery({
         queryKey: ['members'],
         // enabled: !loading && !!user?.email,
         queryFn: async () => {
-          const { data } = await axios(`http://localhost:3000/allagreements`)
+          const { data } = await axiosSecure(`/allagreements`)
           return data
         },
       })

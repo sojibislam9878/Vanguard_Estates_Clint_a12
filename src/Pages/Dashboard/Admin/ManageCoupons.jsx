@@ -1,15 +1,16 @@
 import { Dialog, DialogPanel } from '@headlessui/react'
-import axios from 'axios';
 import { IoMdClose } from "react-icons/io";
 import { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const ManageCoupons = () => {
+  const axiosSecure=useAxiosSecure()
     const { data: coupons ,refetch} = useQuery({
         queryKey: ['coupons'],
         queryFn: async () => {
-          const { data } = await axios(`http://localhost:3000/allcoupons`)
+          const { data } = await axiosSecure(`/allcoupons`)
           return data
         },
       })
@@ -32,7 +33,7 @@ const ManageCoupons = () => {
         const finalData = {title:datas?.title, percentage, description:datas?.description, code:datas.code}
         console.log(finalData);
 
-        const {data}= await axios.post(`http://localhost:3000/coupons`, finalData)
+        const {data}= await axiosSecure.post(`/coupons`, finalData)
         console.log(data);
         if (data.insertedId) {
             reset()
@@ -44,7 +45,7 @@ const ManageCoupons = () => {
     let [isOpen, setIsOpen] = useState(false)
 
     const handleDelete= async (id)=>{
-        const {data}= await axios.delete(`http://localhost:3000/deletecoupons/${id}`)
+        const {data}= await axiosSecure.delete(`/deletecoupons/${id}`)
         console.log(data);
         if (data.deletedCount >= 1) {
             alert("delete done")

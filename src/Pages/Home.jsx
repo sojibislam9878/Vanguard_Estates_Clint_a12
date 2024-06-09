@@ -2,15 +2,16 @@ import { useQuery } from "@tanstack/react-query";
 import AboutBuilding from "../Components/AboutBuilding";
 import SectionTitle from "../Components/SectionTitle";
 import Slider from "../Components/Slider";
-import axios from "axios";
 import CouponCard from "../Components/CouponCard";
 import { ToastContainer } from "react-toastify";
 import locationPhoto from '../assets/Images/location.png'
+import useAxiosCommon from "../Hooks/useAxiosCommon";
 const Home = () => {
+  const axiosCommon = useAxiosCommon()
   const {data:coupons}=useQuery({
     queryKey:["coupons"],
     queryFn:async ()=>{
-      const {data}= await axios("http://localhost:3000/allcoupons")
+      const {data}= await axiosCommon("/allcoupons")
       console.log(data);
       return data
     }

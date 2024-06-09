@@ -3,25 +3,22 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useRole from "../../Hooks/useRole";
 import bgimage from "../../assets/Images/placeholder.jpg"
-import axios from "axios";
 import AdminPro from "./Admin/AdminPro";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const MyProfile = () => {
     const { user,loading } = useAuth()
     const [role]=useRole()
-    const {data:agreement = {}}= useQuery({
-      queryKey:["agreement"],
+    const axiosSecure =useAxiosSecure()
+    const { data: agreement = {} } = useQuery({
+      queryKey: ["agreement", user?.email],
       enabled: !loading && !!user?.email,
-      queryFn:async ()=>{
-          const {data} = await axios(`http://localhost:3000/agreement/${user?.email}`,{
-            headers:{
-              Authorization:`Beareer ${localStorage.getItem("access-token")}`
-            }
-          })
+      queryFn: async () => {
+          const {data} = await axiosSecure(`/agreement/${user?.email}`);
           console.log(data);
-          return data
+          return data;
       }
-  })
+  });
   console.log(agreement);
 
     console.log(user)

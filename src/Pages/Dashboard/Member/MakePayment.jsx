@@ -1,18 +1,19 @@
 
 import paymentbg from '../../../assets/Images/paymentbg.jpg'
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import useAuth from '../../../Hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 const MakePayment = () => {
     const {user, loading, setMemberPaymentInfo} = useAuth()
     const navigate =useNavigate()
+    const axiosSecure = useAxiosSecure()
     
     const {data:agreement}= useQuery({
         queryKey:["agreement"],
         enabled: !loading && !!user?.email,
         queryFn:async ()=>{
-            const {data} = await axios(`http://localhost:3000/agreement/${user?.email}`)
+            const {data} = await axiosSecure(`/agreement/${user?.email}`)
             console.log(data);
             return data
         }
@@ -21,7 +22,7 @@ const MakePayment = () => {
     // const { data: agree } = useQuery({
     //     queryKey: ['agree'],
     //     queryFn: async () => {
-    //       const { data } = await axios(`http://localhost:3000/agreement/${user?.email}`)
+    //       const { data } = await axios(`/agreement/${user?.email}`)
     //       console.log(data);
     //       return data
     //     },

@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import useAuth from "../../../Hooks/useAuth";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const PaymentsHistory = () => {
     const {user, loading} =useAuth() 
+    const axiosSecure= useAxiosSecure()
     const {data:paymentInfo}= useQuery({
         queryKey:["paymentIndfo"],
         enabled: !loading && !!user?.email,
         queryFn: async()=>{
-            const {data}= await axios(`http://localhost:3000/payment/${user?.email}`)
+            const {data}= await axiosSecure(`/payment/${user?.email}`)
             console.log(data);
             return(data)
         }

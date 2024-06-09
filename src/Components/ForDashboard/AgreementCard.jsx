@@ -1,29 +1,29 @@
-import axios from 'axios';
 import PropTypes from 'prop-types';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const AgreementCard = ({agreement, refetch}) => {
     const {userName, apartment_number, block_name,floor_number,rent,userEmail,requstDate , image_url , id:apartmentId}= agreement || {}
-
+const axiosSecure = useAxiosSecure()
     const handaleAccept=async (id)=>{
         console.log(id);
         const action = {action:"accept"}
-        const {data} = await axios.put(`http://localhost:3000/agreement/update/${id}`, action)
+        const {data} = await axiosSecure.put(`/agreement/update/${id}`, action)
         console.log(data);
         if (data.modifiedCount >= 1 ) {
-            const {data}= await axios.patch(`http://localhost:3000/user/${userEmail}`)
+            const {data}= await axiosSecure.patch(`/user/${userEmail}`)
             console.log(data);
             alert("agreement accepted")
             refetch()
           }
-          const {data:apdata}= await axios.put(
-            `http://localhost:3000/updateapartmentstatus/${apartmentId}`)
+          const {data:apdata}= await axiosSecure.put(
+            `/updateapartmentstatus/${apartmentId}`)
             console.log(apdata);
     }
     console.log(apartmentId );
     const handaleReject= async (id)=>{
         console.log(id);
         const action = {action:"reject"}
-        const {data} = await axios.put(`http://localhost:3000/agreement/update/${id}`, action)
+        const {data} = await axiosSecure.put(`/agreement/update/${id}`, action)
         console.log(data);
         if (data.modifiedCount >=1 ) {
             alert("requst rejected")

@@ -1,15 +1,17 @@
 import PropTypes from 'prop-types';
 import useAuth from '../Hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import useAxiosCommon from '../Hooks/useAxiosCommon';
 const ApartmentsCard = ({apartment, role}) => {
     const {user}=useAuth()
     const navigate = useNavigate()
+    const axiosCommon= useAxiosCommon()
     
     const userName = user?.displayName || undefined
     const userEmail = user?.email || undefined
     const {_id,floor_number,block_name,apartment_number, rent, image_url } = apartment
     const requstDate = new Date().toISOString().split('T')[0]
-    const handleAgreement =()=>{
+    const handleAgreement = async()=>{
       if (role ==="admin") {
         return alert("Admin can not request for agreement")
       }
@@ -19,15 +21,8 @@ const ApartmentsCard = ({apartment, role}) => {
         const fullData = {userName, userEmail, floor_number, block_name, apartment_number,rent , status:"pending", requstDate , id:_id , image_url}
         console.log(fullData);
         console.log(floor_number);
-        fetch(`http://localhost:3000/agreement?email=${userEmail}`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(fullData),
-    })
-    .then(res=>res.json())
-    .then(data=>{
+
+        const {data}=await axiosCommon.post(`/agreement?email=${userEmail}`, fullData)
         console.log(data);
         if (data.acknowledged === true) {
             alert("kaj hoye geche bro")
@@ -35,7 +30,6 @@ const ApartmentsCard = ({apartment, role}) => {
         if (data.error) {
             alert("alredy kine felecho")
         }
-    })
     }
     return (
         <div className="card card-compact bg-base-100 shadow-xl">

@@ -4,7 +4,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import useAuth from '../../../Hooks/useAuth';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 const CompletePayment = () => {
     const {memberPaymentInfo}=useAuth()
@@ -13,12 +13,13 @@ const CompletePayment = () => {
     const [discount, setDiscount]=useState()
     const [validOffer , setValidOffer]=useState(false)
     const [haveToPay, setHaveToPay]=useState(memberPaymentInfo.rent)
+    const axiosSecure=useAxiosSecure()
 
         const {data:code}=useQuery({
             queryKey:["couponCode", searchCode],
             enabled:!!searchCode,
             queryFn: async()=>{
-                const {data}= await axios(`http://localhost:3000/couponsvalidation/${searchCode}`)
+                const {data}= await axiosSecure(`/couponsvalidation/${searchCode}`)
                 console.log(data);
                 return data
                 
@@ -51,10 +52,10 @@ const CompletePayment = () => {
     },[code, discount, haveToPay, memberPaymentInfo?.rent])
 
     return (
-        <div className='p-4'>
-            <div className='shadow-2xl p-4 backdrop-blur-md lg:w-2/3 lg:mx-auto rounded-xl'>
+        <div className='p-4 h-screen flex justify-center items-center'>
+    <div className='shadow-2xl w-full p-4 backdrop-blur-md lg:w-2/3 lg:mx-auto rounded-xl bg-[#D8136B] bg-opacity-80'>
             <div className=' text-xl font-bold'>
-                <div className=''>
+                <div className='text-white'>
                     <table>
                         <tbody>
                             <tr>
@@ -96,7 +97,7 @@ const CompletePayment = () => {
              </Elements>
             </div>
             </div>
-        </div>
+</div>
     );
 };
 

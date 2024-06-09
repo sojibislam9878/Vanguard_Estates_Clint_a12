@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 
 const ManageMembers = () => {
+  const axiosSecure=useAxiosSecure()
     const { data: members, refetch } = useQuery({
         queryKey: ['members'],
         // enabled: !loading && !!user?.email,
         queryFn: async () => {
-          const { data } = await axios(`http://localhost:3000/members`)
+          const { data } = await axiosSecure(`/members`)
           return data
         },
       })
@@ -16,7 +17,7 @@ const ManageMembers = () => {
 
       const handleRemove=async (member)=>{
         console.log(member.email);
-        const {data}= await axios.patch(`http://localhost:3000/user/update/${member?.email}`, member)
+        const {data}= await axiosSecure.patch(`/user/update/${member?.email}`, member)
         console.log(data);
         if (data.modifiedCount >= 1) {
             alert("removed")
