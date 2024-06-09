@@ -15,11 +15,13 @@ import ManageCoupons from "../Pages/Dashboard/Admin/ManageCoupons";
 import ManageMembers from "../Pages/Dashboard/Admin/ManageMembers";
 import AgreementRequests from "../Pages/Dashboard/Admin/AgreementRequests";
 import CompletePayment from "../Pages/Dashboard/Member/CompletePayment";
+import ErrorPage from "../Pages/ErrorPage";
 
 export const router = createBrowserRouter([
     {
       path: "/",
       element:<Root></Root>,
+      errorElement:<ErrorPage></ErrorPage>,
       children: [
         {
           path: "/",
