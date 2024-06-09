@@ -13,7 +13,11 @@ const MyProfile = () => {
       queryKey:["agreement"],
       enabled: !loading && !!user?.email,
       queryFn:async ()=>{
-          const {data} = await axios(`http://localhost:3000/agreement/${user?.email}`)
+          const {data} = await axios(`http://localhost:3000/agreement/${user?.email}`,{
+            headers:{
+              Authorization:`Beareer ${localStorage.getItem("access-token")}`
+            }
+          })
           console.log(data);
           return data
       }

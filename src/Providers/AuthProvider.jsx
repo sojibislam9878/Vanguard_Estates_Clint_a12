@@ -101,14 +101,30 @@ import {
       const unsubscribe = onAuthStateChanged(auth, currentUser => {
         setUser(currentUser)
         if (currentUser) {
+          const fetchData = async () => {
+            const userInfo = { email: currentUser.email };
+            console.log("User Info:", userInfo);
+          
+            try {
+              const {data} = await axios.post("http://localhost:3000/jwt", userInfo);
+              console.log({data});
+              localStorage.setItem("access-token", data)
+            } catch (error) {
+              console.error("Error:", error);
+            }
+          };
+          fetchData()
           // This function will be called after the component mounts
+          
     const timeoutId = setTimeout(() => {
       saveUser(currentUser)
     }, 1000);
-
     // Cleanup function to clear the timeout if the component unmounts
     setLoading(false)
     return () => clearTimeout(timeoutId);
+    
+        }else{
+          localStorage.removeItem("access-token")
         }
       })
       return () => {
