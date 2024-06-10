@@ -40,21 +40,16 @@ const Footer = () => {
                   Home
                 </h6>
               </Link>
-              <Link to="/allcarft">
+              <Link to="/apartment">
                 <h6 className="font-semibold opacity-80 hover:opacity-100 hover:underline">
-                  All Foods
-                </h6>
-              </Link>
-              <Link to="/addcarft">
-                <h6 className="font-semibold opacity-80 hover:opacity-100 hover:underline">
-                  Gallery
+                  Apartments
                 </h6>
               </Link>
             </div>
           </div>
           <div className=" md:flex justify-between text-center mt-12 pb-6">
             <div>
-              <p>©2024 Flavor Junction all right reserved.</p>
+              <p>©2024 Vanguard Estates all right reserved.</p>
             </div>
             <div className="flex gap-3 lg:gap-6 text-center justify-center mt-3 md:mt-0">
               <div className="lg:text-3xl text-xl hover:cursor-pointer">

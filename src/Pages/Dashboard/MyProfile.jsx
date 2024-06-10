@@ -50,19 +50,19 @@ const MyProfile = () => {
             User Id: {user?.uid}
           </p>
           <div className='w-full p-2 mt-4 rounded-lg'>
-            <div className='flex flex-wrap items-center justify-between text-sm text-gray-600 '>
+            <div className='text-xl  text-gray-600 '>
               <p className='flex flex-col'>
                 Name
                 <span className='font-bold text-black '>
                   {user?.displayName}
                 </span>
               </p>
-              <p className='flex flex-col'>
+              <p className='flex flex-col mt-2'>
                 Email
                 <span className='font-bold text-black '>{user?.email}</span>
               </p>
 
-              <div>
+              <div className="hidden">
                 <button className='bg-[#F43F5E] px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053] block mb-1'>
                   Update Profile
                 </button>

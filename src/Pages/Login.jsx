@@ -5,9 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 import useAuth from "../Hooks/useAuth";
-// import loginphoto from "../assets/images/login.png";
-
-const loginphoto =true
+import loginphoto from "../assets/Images/login.jpg";
 
 const Login = () => {
   const locations = useLocation();
@@ -51,12 +49,12 @@ const Login = () => {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
       }}
-      className=" text-white"
+      className=" text-white min-h-screen flex justify-center items-center"
     >
       <Helmet>
-        <title>Flavor Junction | Login</title>
+        <title>Login</title>
       </Helmet>
-      <div className="flex justify-center items-center p-4 pt-10 pb-12 ">
+      <div className="flex justify-center items-center p-4 pt-10 pb-12 flex-1">
         <div className=" rounded-lg p-6  md:w-2/3 xl:w-1/3 mx-auto shadow-2xl backdrop-blur-md ">
           <form onSubmit={handleSubmit(onSubmit)}>
             <h1 className="text-4xl font-bold mt-12">Log In</h1>
@@ -102,19 +100,19 @@ const Login = () => {
             {errors.password && (
               <span className="text-red-600">Enter Password</span>
             )}
-            <p className="flex justify-end text-[#EA6A12] font-bold my-8">
+            <p className="flex justify-end text-[#4494e4] font-bold my-8">
               Forgot your Password ?
             </p>
             <input
               type="submit"
               value="Log In"
-              className="btn w-full bg-[#EA6A12] hover:bg-[#C75A0F] text-white text-lg border-none"
+              className="btn w-full bg-[#003366] hover:bg-[#062747] text-white text-lg border-none"
             />
           </form>
           <p className="text-center mt-6 mb-8 font-medium opacity-80 text-lg">
             <span className="text-black">Do not have an account?</span>{" "}
             <Link to="/register">
-              <span className="text-[#EA6A12] font-bold">Register Here</span>
+              <span className="text-[#003366] font-bold">Register Here</span>
             </Link>
           </p>
           <div className="divider">OR</div>

@@ -14,7 +14,7 @@ const axiosSecure = useAxiosSecure()
             const {data}= await axiosSecure.patch(`/user/${userEmail}`)
             console.log(data);
             Swal.fire({
-              position: "top-end",
+              position: "center",
               icon: "success",
               title: "agreement accepted",
               showConfirmButton: false,
@@ -34,7 +34,7 @@ const axiosSecure = useAxiosSecure()
         console.log(data);
         if (data.modifiedCount >=1 ) {
             Swal.fire({
-              position: "top-end",
+              position: "center",
               icon: "success",
               title: "requst rejected",
               showConfirmButton: false,

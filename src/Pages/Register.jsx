@@ -4,8 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet";
-// import registerPhoto from "../assets/images/register.jpg";
-const registerPhoto = true
+import registerPhoto from "../assets/Images/register.jpg";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -39,10 +38,10 @@ const Register = () => {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
       }}
-      className="flex justify-center p-4 pt-10 pb-16 text-white"
+      className="flex justify-center items-center text-white min-h-screen"
     >
       <Helmet>
-        <title>Flavor Junction | Register</title>
+        <title>Register</title>
       </Helmet>
 
       <div className=" rounded-lg p-6 md:w-2/3 xl:w-1/3 mx-auto shadow-xl backdrop-blur-md">
@@ -119,13 +118,13 @@ const Register = () => {
           <input
             type="submit"
             value="Create Account"
-            className="btn w-full bg-[#EA6A12] text-white text-lg border-none mt-6"
+            className="btn w-full bg-[#003366] text-white text-lg border-none mt-6"
           />
         </form>
         <p className="text-center mt-6 mb-28 font-medium opacity-80 text-lg">
           <span className="opacity-80">Already have an account?</span>{" "}
           <Link to="/login">
-            <span className="text-[#EA6A12] font-bold">Login</span>
+            <span className="text-[#3482d1] font-bold">Login</span>
           </Link>
         </p>
       </div>

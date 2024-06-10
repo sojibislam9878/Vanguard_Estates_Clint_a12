@@ -53,7 +53,7 @@ const Navbar = () => {
               {!user && (
                 <div className="mt-4">
                   <Link to="/login">
-                    <button className="btn bg-[#003366] text-white font-bold hover:bg-[#C75A0F] w-full md:hidden">
+                    <button className="btn bg-[#003366] text-white font-bold hover:bg-[#082c50] w-full md:hidden">
                       Login
                     </button>
                   </Link>
@@ -128,7 +128,7 @@ const Navbar = () => {
                   <li>
                   <button
                 onClick={logout}
-                className="btn mt-1 bg-[#003366] text-white font-bold hover:bg-[#C75A0F]"
+                className="btn mt-1 bg-[#003366] text-white font-bold hover:bg-[#072644]"
               >
                 Logout
               </button>
@@ -141,7 +141,7 @@ const Navbar = () => {
             <div className="hidden md:flex">
               <div>
                 <Link to="/login">
-                  <button className="btn bg-[#003366]  hover:bg-[#C75A0F] text-white font-bold">
+                  <button className="btn bg-[#003366]  hover:bg-[#0b2641] text-white font-bold">
                     Login
                   </button>
                 </Link>
