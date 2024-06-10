@@ -33,9 +33,9 @@ const MakeAnnouncement = () => {
           <Helmet>
         <title>Dashboard | Make Announcement</title>
       </Helmet>
-             <div className="lg:w-2/3 mx-auto border-2 rounded-xl">
+             <div className="lg:w-2/3 mx-auto border-2 rounded-xl ">
              <form onSubmit={handleSubmit(onSubmit)} className="p-4 shadow-2xl rounded-xl bg-base-100">
-              <h1 className=" text-4xl text-center font-bold lg:mt-12 pt-4 lg:p-0 lg:border-none">
+              <h1 className="font-play text-4xl text-center font-bold lg:mt-12 pt-4 lg:p-0 lg:border-none">
                 Make An Announcment
               </h1>
               <input

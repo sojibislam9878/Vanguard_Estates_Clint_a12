@@ -51,7 +51,7 @@ const Home = () => {
           }></SectionTitle>
           <div className="flex flex-col-reverse lg:flex-row justify-between gap-6">
             <div className="lg:w-2/3 w-full mt-10 md:mt-0 ">
-              <h1 className="text-4xl font-bold lg:mt-12 xl:mt-20 ">Find Us</h1>
+              <h1 className="text-4xl font-bold lg:mt-12 xl:mt-20 font-play">Find Us</h1>
               <p className="mt-6 opacity-80 leading-8">Vanguard Estates is ideally located to offer you the utmost convenience and lifestyle benefits. Situated in a prime area, our community is just minutes away from top-rated schools, shopping centers, fine dining, and entertainment options. Residents can enjoy quick access to major highways and public transportation, making commutes to the city seamless. Nearby parks and recreational facilities provide plenty of opportunities for outdoor activities and family fun. Whether you are looking for a quiet place to relax or an active urban lifestyle, Vanguard Estates offers the perfect location to meet your needs.</p>
             <button className="btn lg:mt-12 bg-[#003366] mt-4 text-white">Details</button>
             </div>

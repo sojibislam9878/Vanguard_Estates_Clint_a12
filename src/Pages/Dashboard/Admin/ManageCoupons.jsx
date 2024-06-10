@@ -88,7 +88,7 @@ const ManageCoupons = () => {
           <Helmet>
         <title>Dashboard | Manage Coupons</title>
       </Helmet>
-            <h1 className="text-center text-4xl font-bold mt-6 border-b-2 border-dashed pb-6">Manage Coupons</h1>
+            <h1 className="font-play text-center text-4xl font-bold mt-6 border-b-2 border-dashed pb-6">Manage Coupons</h1>
             <button onClick={()=>setIsOpen(!isOpen)} className="btn mt-6 bg-[#003366] text-white">Add a new Coupon</button>
             <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50 ">
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4">

@@ -41,7 +41,7 @@ const ManageMembers = () => {
           <Helmet>
         <title>Dashboard | Manage Members</title>
       </Helmet>
-            <h1 className="text-center text-4xl font-bold mt-6 border-b-2 border-dashed pb-6">Manage Members</h1>
+            <h1 className="text-center font-play text-4xl font-bold mt-6 border-b-2 border-dashed pb-6">Manage Members</h1>
             <div className="overflow-x-auto">
   <table className="table mt-4">
     {/* head */}
