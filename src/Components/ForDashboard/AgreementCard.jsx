@@ -31,18 +31,22 @@ const axiosSecure = useAxiosSecure()
         }
     }
     return (
-        <div>
+        <div className='mt-14'>
             <div className="card card-compact bg-base-100 shadow-xl">
   <figure><img src={image_url} alt="Shoes" /></figure>
   <div className="card-body">
-    <h2 className="">User Name: {userName}</h2>
-    <h2 className="">User email: {userEmail}</h2>
-    <p>Floor No: {floor_number}</p>
-    <p>Block No: {block_name}</p>
-    <p>Room No: {apartment_number}</p>
-    <p>Rent: {rent}</p>
-    <p>Agreement Date: {requstDate}</p>
-    <div className="card-actions justify-evenly gap-12">
+    <h2 className='text-xl font-bold'>User Name: {userName}</h2>
+    <h2 className='text-xl font-bold'>User email: {userEmail}</h2>
+    <div className='flex justify-between mt-2'>
+    <p className='text-lg font-bold opacity-80'>Floor No: {floor_number}</p>
+    <p className='text-lg font-bold opacity-80'>Block No: {block_name}</p>
+    </div>
+    <div className='flex justify-between mt-2'>
+    <p className='text-lg font-bold opacity-80'>Room No: {apartment_number}</p>
+    <p className='text-lg font-bold opacity-80'>Rent: {rent}</p>
+    </div>
+    <p className='text-lg font-bold opacity-80 mt-2'>Request Date: {requstDate}</p>
+    <div className="card-actions justify-around gap-12 mt-2">
       <button onClick={()=>handaleAccept(agreement._id)} className="btn bg-green-400 hover:bg-green-600 text-white">Accept</button>
       <button onClick={()=>handaleReject(agreement._id)} className="btn bg-red-400 hover:bg-red-600 text-white">Reject</button>
     </div>

@@ -46,8 +46,8 @@ const MakeAnnouncement = () => {
 
               <input
                 type="submit"
-                value="announced"
-                className="btn w-full bg-[#EA6A12] text-white text-lg mt-10 hover:bg-[#C75A0F]"
+                value="Announced"
+                className="btn w-full bg-[#003366] text-white text-lg mt-10 hover:bg-[#0a2b4d]"
               />
             </form>
              </div>

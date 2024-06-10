@@ -16,7 +16,7 @@ const AgreementRequests = () => {
 
     return (
         <div className="p-4">
-            AgreementRequests
+            <h1 className="text-center text-4xl font-bold mt-6 border-b-2 border-dashed pb-6">Agreements Requsests</h1>
            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
            {
                 agreements?.map(agreement=><AgreementCard key={agreement._id} agreement={agreement} refetch={refetch}></AgreementCard>)

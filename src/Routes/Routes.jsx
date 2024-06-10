@@ -16,6 +16,7 @@ import ManageMembers from "../Pages/Dashboard/Admin/ManageMembers";
 import AgreementRequests from "../Pages/Dashboard/Admin/AgreementRequests";
 import CompletePayment from "../Pages/Dashboard/Member/CompletePayment";
 import ErrorPage from "../Pages/ErrorPage";
+import Test from "../Pages/Test";
 
 export const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
         {
           path: "/login",
           element:<Login></Login>,
+        },
+        {
+          path: "/test",
+          element:<Test></Test>,
         },
         {
           path: "/register",

@@ -54,11 +54,11 @@ const ManageCoupons = () => {
     }
     return (
         <div className="p-4">
-            <h1 className="text-center text-4xl font-bold mt-6">Manage Coupons</h1>
-            <button onClick={()=>setIsOpen(!isOpen)} className="btn mt-6">Add a new Coupon</button>
-            <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
+            <h1 className="text-center text-4xl font-bold mt-6 border-b-2 border-dashed pb-6">Manage Coupons</h1>
+            <button onClick={()=>setIsOpen(!isOpen)} className="btn mt-6 bg-[#003366] text-white">Add a new Coupon</button>
+            <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50 ">
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-          <DialogPanel className="max-w-lg space-y-4 border bg-white p-12">
+          <DialogPanel className="max-w-lg space-y-4 border shadow-xl rounded-xl bg-white p-12">
             <div className='relative'>
             <h1 className="font-bold">Add a coupon</h1> <span onClick={()=>setIsOpen(false)} className='btn absolute -top-3 right-0'><IoMdClose className='text-red-700 text-3xl font-bold' /></span>
             </div>
@@ -104,8 +104,8 @@ const ManageCoupons = () => {
               <div>
                 <input
                 type="submit"
-                value="Add"
-                className="btn w-full bg-[#EA6A12] text-white text-lg mt-10 hover:bg-[#C75A0F]"
+                value="Submit"
+                className="btn w-full bg-[#003366] text-white text-lg mt-10 hover:bg-[#092d52]"
               />
               </div>
             </form>
@@ -116,11 +116,11 @@ const ManageCoupons = () => {
   <table className="table mt-6">
     {/* head */}
     <thead>
-      <tr>
+      <tr  className='text-lg'>
         <th></th>
         <th>Title</th>
-        <th>Description</th>
-        <th>Parcentage</th>
+        <th>Code</th>
+        <th>Discount</th>
         <th>Remove</th>
       </tr>
     </thead>
@@ -130,7 +130,7 @@ const ManageCoupons = () => {
             <th>{i+1}</th>
             <td>{coupon.title}</td>
             <td>{coupon.code}</td>
-            <td>{coupon.percentage}</td>
+            <td>{coupon.percentage}%</td>
             <td><button onClick={()=>handleDelete(coupon._id)} className='btn'>remove</button></td>
           </tr>))
         }

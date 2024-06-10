@@ -8,7 +8,7 @@ import locationPhoto from '../assets/Images/location.png'
 import useAxiosCommon from "../Hooks/useAxiosCommon";
 const Home = () => {
   const axiosCommon = useAxiosCommon()
-  const {data:coupons}=useQuery({
+  const {data:coupons =[]}=useQuery({
     queryKey:["coupons"],
     queryFn:async ()=>{
       const {data}= await axiosCommon("/allcoupons")
