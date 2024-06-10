@@ -39,9 +39,9 @@ const Sidebar = () => {
   
   // console.log( user?.email,role, isLoading);
 
-if (isLoading) {
-  return <p>loading...</p>
-}
+// if (isLoading) {
+//   return <Spinner></Spinner>
+// }
 
 
   // Sidebar Responsive Handler
@@ -101,36 +101,38 @@ if (isLoading) {
             {/* Conditional toggle button here.. */}
 
             {/*  Menu Items */}
-            <nav>
-              {/* Profile */}
-              {(role==="member" || role==="user") && <Navbars label={"Profile"} address={'/dashboard'} icon={CgProfile}></Navbars>}
-
-              {/* make payments */}
-              {role==="member" && <Navbars label={"Make Payments"} address={'makepayment'} icon={MdOutlinePayments}></Navbars>}
-
-              {/*payments payment history */}
-              {role==="member" && <Navbars label={"Payments History"} address={'paymentshistory'} icon={GrHistory}></Navbars>}
-
-              {/* Announcments */}
-              {(role==="member" || role==="user")&&<Navbars label={"Announcments"} address={'announcments'} icon={GrAnnounce}></Navbars>}
-
-              {/* admin profile */}
-              {role==="admin" &&<Navbars label={"Admin Profile"} address={'/dashboard'} icon={CgProfile}></Navbars>}
-
-              {/* Manage Members */}
-              {role==="admin" &&<Navbars label={"Manage Members"} address={'managemembers'} icon={MdManageAccounts}></Navbars>}
-
-              {/* Make Announcement */}
-              {role==="admin" &&<Navbars label={"Make Announcement"} address={'makeannouncement'} icon={GrAnnounce}></Navbars>}
-
-              {/*Agreement Requests */}
-              {role==="admin" &&<Navbars label={"Agreement Requests"} address={'agreementrequests'} icon={VscRequestChanges}></Navbars>}
-
-              {/* Manage Coupons */}
-              {role==="admin" &&<Navbars label={"Manage Coupons"} address={'managecoupons'} icon={RiCoupon3Line}></Navbars>}
-
-
-            </nav>
+            {
+              isLoading? ("loading...."):(<nav>
+                {/* Profile */}
+                {(role==="member" || role==="user") && <Navbars label={"Profile"} address={'/dashboard'} icon={CgProfile}></Navbars>}
+  
+                {/* make payments */}
+                {role==="member" && <Navbars label={"Make Payments"} address={'makepayment'} icon={MdOutlinePayments}></Navbars>}
+  
+                {/*payments payment history */}
+                {role==="member" && <Navbars label={"Payments History"} address={'paymentshistory'} icon={GrHistory}></Navbars>}
+  
+                {/* Announcments */}
+                {(role==="member" || role==="user")&&<Navbars label={"Announcments"} address={'announcments'} icon={GrAnnounce}></Navbars>}
+  
+                {/* admin profile */}
+                {role==="admin" &&<Navbars label={"Admin Profile"} address={'/dashboard'} icon={CgProfile}></Navbars>}
+  
+                {/* Manage Members */}
+                {role==="admin" &&<Navbars label={"Manage Members"} address={'managemembers'} icon={MdManageAccounts}></Navbars>}
+  
+                {/* Make Announcement */}
+                {role==="admin" &&<Navbars label={"Make Announcement"} address={'makeannouncement'} icon={GrAnnounce}></Navbars>}
+  
+                {/*Agreement Requests */}
+                {role==="admin" &&<Navbars label={"Agreement Requests"} address={'agreementrequests'} icon={VscRequestChanges}></Navbars>}
+  
+                {/* Manage Coupons */}
+                {role==="admin" &&<Navbars label={"Manage Coupons"} address={'managecoupons'} icon={RiCoupon3Line}></Navbars>}
+  
+  
+              </nav>)
+            }
           </div>
         </div>
 

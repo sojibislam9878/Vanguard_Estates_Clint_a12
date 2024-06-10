@@ -1,27 +1,29 @@
 
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const PaymentsHistory = () => {
-  const [searchText, setSearchText] = useState("");
-  const [paymentInfo, setPaymentInfo] = useState([]);
-  const { user, loading } = useAuth();
+  const [searchText, setSearchText] = useState();
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [paymentInfo, setPaymentInfo]=useState([])
+  useEffect(()=>{
+    
+    fetch(`${import.meta.env.VITE_API_URL}/payment/${user?.email}`)
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data);
+      setPaymentInfo(data)
+    })
+
+  },[ user?.email])
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    if (!loading && user?.email) {
-      try {
-        const { data } = await axiosSecure(`/payment/${user?.email}?search=${searchText}`);
-        console.log(data);
-        setPaymentInfo(data);
-      } catch (error) {
-        console.error("Error fetching payment info:", error);
-      }
-    }
+    const {data}= await axiosSecure(`/payments/${user?.email}?search=${searchText}`)
+    setPaymentInfo(data)
   };
-
   const handleInputChange = (e) => {
     setSearchText(e.target.value);
   };

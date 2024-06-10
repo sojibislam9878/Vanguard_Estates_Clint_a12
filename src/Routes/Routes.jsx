@@ -17,6 +17,7 @@ import AgreementRequests from "../Pages/Dashboard/Admin/AgreementRequests";
 import CompletePayment from "../Pages/Dashboard/Member/CompletePayment";
 import ErrorPage from "../Pages/ErrorPage";
 import Test from "../Pages/Test";
+import PrivetRoute from "../PrivetRoutes/PrivetRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -52,41 +53,41 @@ export const router = createBrowserRouter([
       children:[
         {
           path:"/dashboard",
-          element:<MyProfile></MyProfile>
+          element:<PrivetRoute><MyProfile></MyProfile></PrivetRoute>
         },
         {
           path:"announcments",
-          element:<Announcement></Announcement>
+          element:<PrivetRoute><Announcement></Announcement></PrivetRoute>
         },
         // member routs 
         {
           path:"makepayment",
-          element:<MakePayment></MakePayment>
+          element:<PrivetRoute><MakePayment></MakePayment></PrivetRoute>
         },
         {
           path:"paymentshistory",
-          element:<PaymentsHistory></PaymentsHistory>
+          element:<PrivetRoute><PaymentsHistory></PaymentsHistory></PrivetRoute>
         },
         // admin routes 
         {
           path:"adminprofile",
-          element:<AdminPro></AdminPro>
+          element:<PrivetRoute><AdminPro></AdminPro></PrivetRoute>
         },
         {
           path:"managemembers",
-          element:<ManageMembers></ManageMembers>
+          element:<PrivetRoute><ManageMembers></ManageMembers></PrivetRoute>
         },
         {
           path:"makeannouncement",
-          element:<MakeAnnouncement></MakeAnnouncement>
+          element:<PrivetRoute><MakeAnnouncement></MakeAnnouncement></PrivetRoute>
         },
         {
           path:"agreementrequests",
-          element:<AgreementRequests></AgreementRequests>
+          element:<PrivetRoute><AgreementRequests></AgreementRequests></PrivetRoute>
         },
         {
           path:"managecoupons",
-          element:<ManageCoupons></ManageCoupons>
+          element:<PrivetRoute><ManageCoupons></ManageCoupons></PrivetRoute>
         },
       ]
     },
