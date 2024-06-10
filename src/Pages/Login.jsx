@@ -52,7 +52,7 @@ const Login = () => {
       className=" text-white min-h-screen flex justify-center items-center"
     >
       <Helmet>
-        <title>Login</title>
+        <title>Vanguard Estates | Login</title>
       </Helmet>
       <div className="flex justify-center items-center p-4 pt-10 pb-12 flex-1">
         <div className=" rounded-lg p-6  md:w-2/3 xl:w-1/3 mx-auto shadow-2xl backdrop-blur-md ">

@@ -5,6 +5,7 @@ import useRole from "../../Hooks/useRole";
 import bgimage from "../../assets/Images/placeholder.jpg"
 import AdminPro from "./Admin/AdminPro";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const MyProfile = () => {
     const { user,loading } = useAuth()
@@ -27,6 +28,9 @@ const MyProfile = () => {
     }
     return (
         <div className="lg:flex gap-6 p-6 lg:mt-44">
+          <Helmet>
+        <title>Dashboard | My Profile</title>
+      </Helmet>
             <div className='flex-1'>
       <div className='bg-white shadow-lg  rounded-xl'>
         <img

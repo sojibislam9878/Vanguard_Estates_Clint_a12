@@ -7,6 +7,7 @@ import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Spinner from '../../../Components/Spinner';
 import { ToastContainer, toast } from 'react-toastify';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet';
 
 const ManageCoupons = () => {
   const axiosSecure=useAxiosSecure()
@@ -84,6 +85,9 @@ const ManageCoupons = () => {
     }
     return (
         <div className="p-4">
+          <Helmet>
+        <title>Dashboard | Manage Coupons</title>
+      </Helmet>
             <h1 className="text-center text-4xl font-bold mt-6 border-b-2 border-dashed pb-6">Manage Coupons</h1>
             <button onClick={()=>setIsOpen(!isOpen)} className="btn mt-6 bg-[#003366] text-white">Add a new Coupon</button>
             <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50 ">

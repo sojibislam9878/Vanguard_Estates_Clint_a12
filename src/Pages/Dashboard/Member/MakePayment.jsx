@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAuth from '../../../Hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet';
 const MakePayment = () => {
     const {user, loading, setMemberPaymentInfo} = useAuth()
     const navigate =useNavigate()
@@ -44,6 +45,9 @@ const MakePayment = () => {
         backgroundPosition: "center",} }
          className='flex flex-col justify-center p-4  mx-auto h-screen my-auto'>
             <div>
+            <Helmet>
+        <title>Dashboard | Make Payment</title>
+      </Helmet>
             <form onSubmit={handleSubmit}>
          <div className='w-2/3 mx-auto backdrop-blur-lg border p-4 rounded-xl'>
          <div className='lg:flex justify-between gap-6 '>

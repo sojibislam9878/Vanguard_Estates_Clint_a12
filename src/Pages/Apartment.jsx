@@ -3,6 +3,7 @@ import ApartmentsCard from "../Components/ApartmentsCard";
 import useRole from "../Hooks/useRole";
 import Spinner from "../Components/Spinner";
 import useAuth from "../Hooks/useAuth";
+import { Helmet } from "react-helmet";
 
 const Apartment = () => {
   const [apartments, setApartments] = useState([]);
@@ -58,6 +59,9 @@ const Apartment = () => {
   }
   return (
     <div className="container mx-auto p-4">
+      <Helmet>
+        <title>Dashboard | Apartments</title>
+      </Helmet>
       <div className="text-center">
         <h1 className="text-4xl font-extrabold border-b-2  border-dashed font-play pb-4 mt-4">All apartments</h1>
       </div>

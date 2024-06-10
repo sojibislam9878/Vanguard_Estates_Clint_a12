@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import ApartmentPercentage from "../../../Components/ApartmentsPercentage";
 import UserPercentage from "../../../Components/UserPercentage";
 import useAuth from "../../../Hooks/useAuth";
@@ -54,7 +55,11 @@ const AdminPro = () => {
     console.log(vacantApartmentCount , );
     return (
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 p-4">
+         <Helmet>
+        <title>Dashboard | Admin Profile</title>
+      </Helmet>
             {/* single card  */}
+
             <div className='h-full'>
       <div className='bg-white shadow-lg h-full rounded-xl'>
         <img

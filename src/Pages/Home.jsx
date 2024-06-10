@@ -6,6 +6,7 @@ import CouponCard from "../Components/CouponCard";
 import { ToastContainer } from "react-toastify";
 import locationPhoto from '../assets/Images/location.png'
 import useAxiosCommon from "../Hooks/useAxiosCommon";
+import { Helmet } from "react-helmet";
 const Home = () => {
   const axiosCommon = useAxiosCommon()
   const {data:coupons =[]}=useQuery({
@@ -18,6 +19,9 @@ const Home = () => {
   })
   return (
     <div className="">
+      <Helmet>
+        <title>Vanguard Estates</title>
+      </Helmet>
       <Slider></Slider>
       <div className="container mx-auto mt-10">
         <SectionTitle title={"About Our Buildings"} para={"Our buildings at Vanguard Estates are a testament to superior craftsmanship and innovative design. Each structure is built with the highest standards of quality and sustainability."}></SectionTitle>

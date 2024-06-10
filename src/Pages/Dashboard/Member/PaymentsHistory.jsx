@@ -1,4 +1,5 @@
 
+import { Helmet } from "react-helmet";
 import Spinner from "../../../Components/Spinner";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
@@ -39,6 +40,9 @@ const PaymentsHistory = () => {
     }
     return (
         <div className="p-4">
+          <Helmet>
+        <title>Dashboard | Payment History</title>
+      </Helmet>
           <div className="border-b-2 border-dashed pb-6 lg:flex justify-center items-center gap-6 mt-6">
         <h1 className="text-center text-4xl font-bold flex-1">
           All payments info here <sup><span className="text-red-400">{paymentInfo.length}</span></sup>

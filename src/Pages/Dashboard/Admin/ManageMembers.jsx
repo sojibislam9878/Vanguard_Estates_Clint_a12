@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Spinner from "../../../Components/Spinner";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 
 const ManageMembers = () => {
@@ -37,6 +38,9 @@ const ManageMembers = () => {
       }
     return (
         <div className="p-4">
+          <Helmet>
+        <title>Dashboard | Manage Members</title>
+      </Helmet>
             <h1 className="text-center text-4xl font-bold mt-6 border-b-2 border-dashed pb-6">Manage Members</h1>
             <div className="overflow-x-auto">
   <table className="table mt-4">

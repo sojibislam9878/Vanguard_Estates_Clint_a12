@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import backgroundimg from "../../assets/Images/announcment.png"
 import { ImSpinner6 } from "react-icons/im";
+import { Helmet } from "react-helmet";
 
 const Announcement = () => {
     const axiosSecure=useAxiosSecure()
@@ -21,6 +22,9 @@ const Announcement = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",} }>
+            <Helmet>
+        <title>Dashboard | Announcement</title>
+      </Helmet>
             {
                 announcments?.map(announc=><div key={announc._id} className="mt-6 backdrop-blur-md p-6 md:w-2/3 mx-auto rounded-xl  border border-red-600 ">
                 <h1 className=" text-4xl font-bold text-center">{announc.title}</h1>

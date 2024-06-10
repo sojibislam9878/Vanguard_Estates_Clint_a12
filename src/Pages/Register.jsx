@@ -41,7 +41,7 @@ const Register = () => {
       className="flex justify-center items-center text-white min-h-screen"
     >
       <Helmet>
-        <title>Register</title>
+        <title>Vanguard Estates | Register</title>
       </Helmet>
 
       <div className=" rounded-lg p-6 md:w-2/3 xl:w-1/3 mx-auto shadow-xl backdrop-blur-md">
