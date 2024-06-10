@@ -6,7 +6,7 @@ Here is website live URL-->https://sojibislam9878-assignment12.web.app/
 * It's SPA (Single page application).
 * This website uses a real database (MongoDB)
 * This website's api secured by JWT
-* On this website uses React Toast and Sweet alart for Better experience.
+* On this website uses React Toast and Sweet alert for Better experience.
 * Users can payment through online
 * This website hosted on google firebase.
 * This website has signup and loging validation.

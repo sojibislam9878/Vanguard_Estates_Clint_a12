@@ -5,6 +5,7 @@ import useAuth from '../../../Hooks/useAuth';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { ToastContainer, toast } from 'react-toastify';
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 const CompletePayment = () => {
     const {memberPaymentInfo}=useAuth()
@@ -27,14 +28,32 @@ const CompletePayment = () => {
         })
     const handleCoupons =()=>{
         if (!couponCode) {
-            return alert("enter a coupon code")
+            return toast.error("Enter a Code", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
         }
         setSearchCode(couponCode)
     }
 
     useEffect(()=>{
         if (code?.notFound) {
-            alert(code?.notFound)
+            toast.error(`${code?.notFound}`, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
         }else{
             const totalDiscount =( memberPaymentInfo?.rent * code?.percentage) / 100
         const discountedRent = memberPaymentInfo?.rent - totalDiscount
@@ -97,6 +116,7 @@ const CompletePayment = () => {
              </Elements>
             </div>
             </div>
+            <ToastContainer />
 </div>
     );
 };

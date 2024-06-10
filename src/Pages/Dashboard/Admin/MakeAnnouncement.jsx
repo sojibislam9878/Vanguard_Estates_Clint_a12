@@ -1,6 +1,7 @@
 
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const MakeAnnouncement = () => {
   const axiosSecure=useAxiosSecure()
@@ -16,7 +17,13 @@ const MakeAnnouncement = () => {
         const {data}= await axiosSecure.post("/announcment",datas)
         console.log(data);
         if (data.insertedId) {
-            alert("announcment added")
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "announcment added",
+              showConfirmButton: false,
+              timer: 1500
+            });
             reset()
         }
       };

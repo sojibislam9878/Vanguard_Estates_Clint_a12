@@ -4,10 +4,13 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import Spinner from '../../../Components/Spinner';
+import { ToastContainer, toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 const ManageCoupons = () => {
   const axiosSecure=useAxiosSecure()
-    const { data: coupons ,refetch} = useQuery({
+    const { data: coupons ,refetch , isLoading} = useQuery({
         queryKey: ['coupons'],
         queryFn: async () => {
           const { data } = await axiosSecure(`/allcoupons`)
@@ -24,10 +27,28 @@ const ManageCoupons = () => {
     
       const onSubmit =async (datas) => {
         if (datas.percentage <=0) {
-             return alert("Discount Percentage can not be 0 or smaller")
+             return toast.warn("Discount Percentage can not be 0 or smaller", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              });
         }
         if (datas.percentage >100) {
-             return alert("Discount Percentage can not biger then 100")
+             return toast.warn("Discount Percentage can not biger then 100", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              });
         }
         const percentage = parseInt(datas.percentage)
         const finalData = {title:datas?.title, percentage, description:datas?.description, code:datas.code}
@@ -48,9 +69,18 @@ const ManageCoupons = () => {
         const {data}= await axiosSecure.delete(`/deletecoupons/${id}`)
         console.log(data);
         if (data.deletedCount >= 1) {
-            alert("delete done")
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "delete done",
+              showConfirmButton: false,
+              timer: 1500
+            });
             refetch()
         }
+    }
+    if (isLoading) {
+      return <Spinner></Spinner>
     }
     return (
         <div className="p-4">
@@ -137,6 +167,7 @@ const ManageCoupons = () => {
     </tbody>
   </table>
 </div>
+<ToastContainer />
         </div>
     );
 };

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const AgreementCard = ({agreement, refetch}) => {
     const {userName, apartment_number, block_name,floor_number,rent,userEmail,requstDate , image_url , id:apartmentId}= agreement || {}
@@ -12,7 +13,13 @@ const axiosSecure = useAxiosSecure()
         if (data.modifiedCount >= 1 ) {
             const {data}= await axiosSecure.patch(`/user/${userEmail}`)
             console.log(data);
-            alert("agreement accepted")
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "agreement accepted",
+              showConfirmButton: false,
+              timer: 1500
+            });
             refetch()
           }
           const {data:apdata}= await axiosSecure.put(
@@ -26,7 +33,13 @@ const axiosSecure = useAxiosSecure()
         const {data} = await axiosSecure.put(`/agreement/update/${id}`, action)
         console.log(data);
         if (data.modifiedCount >=1 ) {
-            alert("requst rejected")
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "requst rejected",
+              showConfirmButton: false,
+              timer: 1500
+            });
             refetch()
         }
     }

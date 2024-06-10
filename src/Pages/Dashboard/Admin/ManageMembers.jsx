@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Spinner from "../../../Components/Spinner";
+import Swal from "sweetalert2";
 
 
 const ManageMembers = () => {
   const axiosSecure=useAxiosSecure()
-    const { data: members, refetch } = useQuery({
+    const { data: members, refetch, isLoading } = useQuery({
         queryKey: ['members'],
         // enabled: !loading && !!user?.email,
         queryFn: async () => {
@@ -20,9 +22,18 @@ const ManageMembers = () => {
         const {data}= await axiosSecure.patch(`/user/update/${member?.email}`, member)
         console.log(data);
         if (data.modifiedCount >= 1) {
-            alert("removed")
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Success",
+            showConfirmButton: false,
+            timer: 1500
+          });
             refetch()
         }
+      }
+      if (isLoading) {
+        return <Spinner></Spinner>
       }
     return (
         <div className="p-4">

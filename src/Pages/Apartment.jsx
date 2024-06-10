@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import ApartmentsCard from "../Components/ApartmentsCard";
 import useRole from "../Hooks/useRole";
+import Spinner from "../Components/Spinner";
+import useAuth from "../Hooks/useAuth";
 
 const Apartment = () => {
   const [apartments, setApartments] = useState([]);
@@ -10,9 +12,11 @@ const Apartment = () => {
   const totalPage = Math.ceil(dataCount / cardPerPage);
   const [currentPage, setCurrentPage] = useState(1);
   const pages = [...Array(totalPage).keys()].map((i) => i + 1);
+  const [loding, setLoading]=useState(true)
 
-  const [role]=useRole()
+  const [role, isLoading]=useRole()
   console.log(role);
+  const {loading}=useAuth()
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/apartments?page=${currentPage}&size=${cardPerPage}`)
@@ -29,6 +33,7 @@ const Apartment = () => {
     .then(data=>{
         console.log(data);
         setDataCount(data.length)
+        setLoading(false)
     })
 
   },[])
@@ -47,6 +52,10 @@ const Apartment = () => {
   const handleCurrentPage = (val) => {
     setCurrentPage(val);
   };
+
+  if (loding || isLoading || loading) {
+    return <Spinner></Spinner>
+  }
   return (
     <div className="container mx-auto p-4">
       <div className="text-center">

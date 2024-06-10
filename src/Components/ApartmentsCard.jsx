@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import useAuth from '../Hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import useAxiosCommon from '../Hooks/useAxiosCommon';
+import Swal from 'sweetalert2';
 const ApartmentsCard = ({apartment, role}) => {
     const {user}=useAuth()
     const navigate = useNavigate()
@@ -13,7 +14,12 @@ const ApartmentsCard = ({apartment, role}) => {
     const requstDate = new Date().toISOString().split('T')[0]
     const handleAgreement = async()=>{
       if (role ==="admin") {
-        return alert("Admin can not request for agreement")
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Admin can not request for agreement",
+        });
+        return
       }
       if (!role) {
         return navigate("/login")
@@ -25,10 +31,20 @@ const ApartmentsCard = ({apartment, role}) => {
         const {data}=await axiosCommon.post(`/agreement?email=${userEmail}`, fullData)
         console.log(data);
         if (data.acknowledged === true) {
-            alert("kaj hoye geche bro")
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Rqquest sent!!! wait for admin confirmation",
+              showConfirmButton: false,
+              timer: 1500
+            });
         }
         if (data.error) {
-            alert("alredy kine felecho")
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "You all ready sent a agreement request",
+            });
         }
     }
     return (

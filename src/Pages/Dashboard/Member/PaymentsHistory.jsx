@@ -1,11 +1,13 @@
 
+import Spinner from "../../../Components/Spinner";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 
 const PaymentsHistory = () => {
   const [searchText, setSearchText] = useState();
-  const { user } = useAuth();
+  const { user , loading} = useAuth();
+  const [isLoading, setIsloading]=useState(true)
   const axiosSecure = useAxiosSecure();
   const [paymentInfo, setPaymentInfo]=useState([])
   useEffect(()=>{
@@ -15,21 +17,26 @@ const PaymentsHistory = () => {
     .then(data=>{
       console.log(data);
       setPaymentInfo(data)
+      setIsloading(false)
     })
 
   },[ user?.email])
 
   const handleSearch = async (e) => {
+    setIsloading(true)
     e.preventDefault();
     const {data}= await axiosSecure(`/payments/${user?.email}?search=${searchText}`)
     setPaymentInfo(data)
+    setIsloading(false)
   };
   const handleInputChange = (e) => {
     setSearchText(e.target.value);
   };
 
 
-    
+    if (loading || isLoading) {
+      return <Spinner></Spinner>
+    }
     return (
         <div className="p-4">
           <div className="border-b-2 border-dashed pb-6 lg:flex justify-center items-center gap-6 mt-6">

@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import AgreementCard from "../../../Components/ForDashboard/AgreementCard";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Spinner from "../../../Components/Spinner";
 
 const AgreementRequests = () => {
   const axiosSecure=useAxiosSecure()
-    const { data: agreements , refetch} = useQuery({
+    const { data: agreements , refetch , isLoading} = useQuery({
         queryKey: ['members'],
         // enabled: !loading && !!user?.email,
         queryFn: async () => {
@@ -13,6 +14,10 @@ const AgreementRequests = () => {
         },
       })
       console.log(agreements);
+
+      if (isLoading) {
+        return <Spinner></Spinner>
+      }
 
     return (
         <div className="p-4">
