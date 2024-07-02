@@ -13,6 +13,4 @@ Here is website live URL-->https://sojibislam9878-assignment12.web.app/
 * Website has different dashboard for admin, member, user.
 * Admin can change or delete any data form database
 
-## Admin accoutn info
-admin mail-> admin@gmail.com 
-admin password-> asdASD
+[Server side code](https://github.com/sojibislam9878/Vanguard_Estates_Server_a12)
